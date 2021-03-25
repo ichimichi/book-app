@@ -1,11 +1,9 @@
 spring:
-  data:
-    mongodb:
-      database: "test2"
-      port: 27017
-      host: "localhost"
-  application:
-    name: favourite-service
+ data:
+   mongodb:
+     database: FavDB
+     port: 27017
+     host: localhost
 server:
-  port: 8082
+ port: 8082
 
