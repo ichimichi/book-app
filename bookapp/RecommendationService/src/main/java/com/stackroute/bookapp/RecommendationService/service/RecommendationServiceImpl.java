@@ -1,6 +1,7 @@
 package com.stackroute.bookapp.RecommendationService.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,31 @@ public class RecommendationServiceImpl implements RecommendationService {
 	@Override
 	public Book removeBookByUser(Book book, String userId) throws Exception {
 		// TODO Auto-generated method stub
-		if (recommendationRepository.existsById(userId)) {
-
+		Book deletedBook = null;
+		if (recommendationRepository.existsByUserId(userId)) {
+			Recommendation rec = recommendationRepository.findByUserId(userId);
+			List bookList = rec.getBooks();
+			
+			Iterator iterator = bookList.listIterator();
+			
+			while (iterator.hasNext()) {
+				Book b = (Book) iterator.next();
+				if (b.getId().equals(book.getId())) {
+					iterator.remove();
+					deletedBook = b;
+				}
+			}
+			rec.setBooks(bookList);
+			recommendationRepository.save(rec);
+			if(deletedBook!=null) {
+				return deletedBook;	
+			}else {
+				throw new Exception("Book not found");
+			}
+			
 		} else {
 			throw new Exception(userId);
 		}
-		return null;
 	}
 
 	@Override
