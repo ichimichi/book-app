@@ -8,6 +8,7 @@ public class RecommendationServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RecommendationServiceApplication.class, args);
+		System.out.println("hello from http://localhost:8083");
 	}
 
 }
