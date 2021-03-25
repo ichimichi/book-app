@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      database: "test2"
+      port: 27017
+      host: "localhost"
+  application:
+    name: favourite-service
+server:
+  port: 8082
+
