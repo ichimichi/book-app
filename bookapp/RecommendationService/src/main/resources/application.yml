@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      database: "test"
+      database: "BookAppDB"
       port: 27017
       host: "localhost"
   application:
