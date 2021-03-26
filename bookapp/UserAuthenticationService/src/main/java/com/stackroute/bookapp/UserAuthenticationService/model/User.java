@@ -1,4 +1,4 @@
-package com.stackroute.bookapp.model;
+package com.stackroute.bookapp.UserAuthenticationService.model;
 
 import java.sql.Date;
 

@@ -1,4 +1,4 @@
-package com.stackroute.bookapp.exception;
+package com.stackroute.bookapp.UserAuthenticationService.exception;
 public class UserNullException extends Exception
 {
 	public UserNullException(String message)

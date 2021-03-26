@@ -1,12 +1,12 @@
-package com.stackroute.bookapp.service;
+package com.stackroute.bookapp.UserAuthenticationService.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.stackroute.bookapp.exception.UserAlreadyExistException;
-import com.stackroute.bookapp.exception.UserNotFoundException;
-import com.stackroute.bookapp.model.User;
-import com.stackroute.bookapp.repository.UserAuthenticationRepository;
+import com.stackroute.bookapp.UserAuthenticationService.exception.UserAlreadyExistException;
+import com.stackroute.bookapp.UserAuthenticationService.exception.UserNotFoundException;
+import com.stackroute.bookapp.UserAuthenticationService.model.User;
+import com.stackroute.bookapp.UserAuthenticationService.repository.UserAuthenticationRepository;
 
 @Service
 public class UserAuthenticationServiceImpl 

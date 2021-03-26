@@ -1,4 +1,4 @@
-package com.stackroute.bookapp.exception;
+package com.stackroute.bookapp.UserAuthenticationService.exception;
 public class UserNotFoundException extends Exception 
 {
 	public UserNotFoundException(String message) 

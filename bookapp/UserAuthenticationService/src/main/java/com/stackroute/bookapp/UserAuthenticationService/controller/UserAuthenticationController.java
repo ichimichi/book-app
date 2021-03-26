@@ -1,32 +1,34 @@
-package com.stackroute.bookapp.controller;
+package com.stackroute.bookapp.UserAuthenticationService.controller;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stackroute.bookapp.exception.*;
-
-import com.stackroute.bookapp.model.User;
-import com.stackroute.bookapp.service.UserAuthenticationService;
+import com.stackroute.bookapp.UserAuthenticationService.exception.*;
+import com.stackroute.bookapp.UserAuthenticationService.model.User;
+import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationService;
+import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationServiceImpl;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 @RestController
 @RequestMapping("/api/v1/auth")
-public class UserAuthenticationController 
-{
+public class UserAuthenticationController {
 	@Autowired
-	UserAuthenticationService service;
+	UserAuthenticationServiceImpl service;
 
-	public UserAuthenticationController(UserAuthenticationService authicationService) {
-		this.service = authicationService;
+	public UserAuthenticationController() {
+		
 	}
+
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody User user) {
 		try {
@@ -36,6 +38,7 @@ public class UserAuthenticationController
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}
 	}
+
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody User user) {
 		try {

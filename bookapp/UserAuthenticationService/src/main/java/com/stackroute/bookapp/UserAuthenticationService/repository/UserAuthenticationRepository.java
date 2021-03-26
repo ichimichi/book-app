@@ -1,8 +1,8 @@
-package com.stackroute.bookapp.repository;
+package com.stackroute.bookapp.UserAuthenticationService.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.stackroute.bookapp.model.User;
+import com.stackroute.bookapp.UserAuthenticationService.model.User;
 
 public interface UserAuthenticationRepository extends JpaRepository<User, String> 
 {
