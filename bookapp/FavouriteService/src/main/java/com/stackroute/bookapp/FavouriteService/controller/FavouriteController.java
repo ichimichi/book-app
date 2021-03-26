@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.bookapp.FavouriteService.exception.BookAlreadyExistsException;
@@ -46,8 +47,8 @@ public class FavouriteController {
 //		
 //	}
 	
-	@PostMapping("/{userId}")
-	public ResponseEntity<?> addBook(@PathVariable String userId,@RequestBody Book book){
+	@PostMapping()
+	public ResponseEntity<?> addBook(@RequestParam String userId,@RequestBody Book book){
 		try {
 		if (service.addBook(book,userId)) {
 			return new ResponseEntity<Book>(book, HttpStatus.CREATED);
@@ -61,7 +62,7 @@ public class FavouriteController {
 
 
 	@DeleteMapping("/{userId}")
-	public ResponseEntity<String> deleteBook(@PathVariable String userId,@RequestBody Book book) {
+	public ResponseEntity<String> deleteBook(@RequestParam String userId,@RequestBody Book book) {
 		try {
 		if (service.removeBook(book,userId)) {
 			return new ResponseEntity<String>("Successfully removed Book", HttpStatus.OK);
@@ -74,7 +75,7 @@ public class FavouriteController {
 	}
 
 	@DeleteMapping("/all/{userId}")
-	public ResponseEntity<String> deleteAllBooks(@PathVariable String userId) {
+	public ResponseEntity<String> deleteAllBooks(@RequestParam String userId) {
 		try {
 			service.deleteAllBooks(userId);
 			return new ResponseEntity<String>("Successfully deleted all books", HttpStatus.OK);
@@ -85,7 +86,7 @@ public class FavouriteController {
 
 	
 	@GetMapping("/{userId}")
-	public ResponseEntity<?> getAllBooksByUserId(@PathVariable String userId) {
+	public ResponseEntity<?> getAllBooksByUserId(@RequestParam String userId) {
 //		return new ResponseEntity<String>("Ohh Yeahh!!Did It!!", HttpStatus.OK);
 		try {
 		List<Book> userBooks = service.getAllBooksByUserId(userId);
