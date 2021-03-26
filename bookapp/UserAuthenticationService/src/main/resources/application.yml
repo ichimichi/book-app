@@ -1,1 +1,10 @@
-
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3306/BookAppDB"
+    username: "root"
+    password: "v3ry$3cur3PASSWORD"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:  port: 8084 
