@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import com.stackroute.bookapp.RecommendationService.model.Book;
 import com.stackroute.bookapp.RecommendationService.service.RecommendationServiceImpl;
 
 @RestController
+@RequestMapping("/api/v1/recommendation")
 public class RecommendationController {
 	
 	@Autowired
@@ -26,7 +28,7 @@ public class RecommendationController {
 		
 	}
 	
-	@GetMapping("/api/v1/recommendation")
+	@GetMapping
 	public ResponseEntity<?> getAllRecommendedBooks(@RequestParam String userId){
 		try {
 			return new ResponseEntity<List<Book>>(recommendationService.getAllRecommendedBooks(userId), HttpStatus.OK);
@@ -35,7 +37,7 @@ public class RecommendationController {
 		}
 	}
 	
-	@PostMapping("/api/v1/recommendation")
+	@PostMapping
 	public ResponseEntity<?> addtoRecommendations(@RequestParam String userId, @RequestBody Book book){
 		try {
 			return new ResponseEntity<Book>(recommendationService.addtoRecommendations(book, userId), HttpStatus.OK);
@@ -44,7 +46,7 @@ public class RecommendationController {
 		}
 	}
 	
-	@DeleteMapping("/api/v1/recommendation")
+	@DeleteMapping
 	public ResponseEntity<?> removeBookByUser(@RequestParam String userId, @RequestBody Book book){
 		try {
 			return new ResponseEntity<Book>(recommendationService.removeBookByUser(book, userId), HttpStatus.OK);

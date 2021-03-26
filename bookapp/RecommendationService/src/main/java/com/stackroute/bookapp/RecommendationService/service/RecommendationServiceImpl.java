@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stackroute.bookapp.RecommendationService.exception.BookNotFoundException;
+import com.stackroute.bookapp.RecommendationService.exception.UserNotFoundException;
 import com.stackroute.bookapp.RecommendationService.model.Book;
 import com.stackroute.bookapp.RecommendationService.model.Recommendation;
 import com.stackroute.bookapp.RecommendationService.repository.RecommendationRepository;
@@ -18,18 +20,18 @@ public class RecommendationServiceImpl implements RecommendationService {
 	RecommendationRepository recommendationRepository;
 
 	@Override
-	public List<Book> getAllRecommendedBooks(String userId) throws Exception {
+	public List<Book> getAllRecommendedBooks(String userId) throws UserNotFoundException {
 		// TODO Auto-generated method stub
 		if (recommendationRepository.existsByUserId(userId)) {
 			Recommendation rec = recommendationRepository.findByUserId(userId);
 			return rec.getBooks();
 		} else {
-			throw new Exception(userId);
+			throw new UserNotFoundException(userId);
 		}
 	}
 
 	@Override
-	public Book removeBookByUser(Book book, String userId) throws Exception {
+	public Book removeBookByUser(Book book, String userId) throws BookNotFoundException, UserNotFoundException {
 		// TODO Auto-generated method stub
 		Book deletedBook = null;
 		if (recommendationRepository.existsByUserId(userId)) {
@@ -50,16 +52,16 @@ public class RecommendationServiceImpl implements RecommendationService {
 			if(deletedBook!=null) {
 				return deletedBook;	
 			}else {
-				throw new Exception("Book not found");
+				throw new BookNotFoundException("Book not found");
 			}
 			
 		} else {
-			throw new Exception(userId);
+			throw new UserNotFoundException(userId);
 		}
 	}
 
 	@Override
-	public Book addtoRecommendations(Book book, String userId) throws Exception {
+	public Book addtoRecommendations(Book book, String userId) {
 		// TODO Auto-generated method stub
 		if (recommendationRepository.existsByUserId(userId)) {
 			Recommendation rec = recommendationRepository.findByUserId(userId);

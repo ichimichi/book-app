@@ -15,18 +15,19 @@
 	</properties>
 
 	<modules>
+		<module>UserAuthenticationService</module>
 		<module>UserService</module>
 		<module>FavouriteService</module>
 		<module>RecommendationService</module>
 	</modules>
 
 	<dependencies>
-		
+
 	</dependencies>
 
 	<build>
 		<plugins>
-			
+
 		</plugins>
 	</build>
 
