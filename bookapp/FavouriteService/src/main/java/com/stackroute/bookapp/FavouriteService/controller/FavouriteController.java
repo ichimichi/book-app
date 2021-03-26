@@ -45,6 +45,7 @@ public class FavouriteController {
 //		
 //		
 //	}
+	
 	@PostMapping("/{userId}")
 	public ResponseEntity<?> addBook(@PathVariable String userId,@RequestBody Book book){
 		try {
@@ -71,7 +72,7 @@ public class FavouriteController {
 			return new ResponseEntity<String>("Book Not Found", HttpStatus.NOT_FOUND);
 		}
 	}
-//	@ApiOperation(value="Delete All notes")
+
 	@DeleteMapping("/all/{userId}")
 	public ResponseEntity<String> deleteAllBooks(@PathVariable String userId) {
 		try {
@@ -82,22 +83,7 @@ public class FavouriteController {
 		}
 	}
 
-	/*
-	 * Define a handler method which will update a specific note by reading the
-	 * Serialized object from request body and save the updated note details in a
-	 * database. This handler method should return any one of the status messages
-	 * basis on different situations: 1. 200(OK) - If the note updated successfully.
-	 * 2. 404(NOT FOUND) - If the note with specified noteId is not found.
-	 * 
-	 * This handler method should map to the URL "/api/v1/note/{id}" using HTTP PUT
-	 * method.
-	 */
-//	@ApiOperation(value="Update Note")
-
-
 	
-	
-//	@ApiOperation(value="Get All notes by UserID")
 	@GetMapping("/{userId}")
 	public ResponseEntity<?> getAllBooksByUserId(@PathVariable String userId) {
 //		return new ResponseEntity<String>("Ohh Yeahh!!Did It!!", HttpStatus.OK);
@@ -114,17 +100,7 @@ public class FavouriteController {
 		}
 	}
 
-	/*
-	 * Define a handler method which will show details of a specific note created by
-	 * specific user. This handler method should return any one of the status
-	 * messages basis on different situations: 1. 200(OK) - If the note found
-	 * successfully. 2. 404(NOT FOUND) - If the note with specified noteId is not
-	 * found. This handler method should map to the URL
-	 * "/api/v1/note/{userId}/{noteId}" using HTTP GET method where "id" should be
-	 * replaced by a valid reminderId without {}
-	 * 
-	 */
-//	@ApiOperation(value="Get Note by UserId and noteId")
 	
+
 	
 }
