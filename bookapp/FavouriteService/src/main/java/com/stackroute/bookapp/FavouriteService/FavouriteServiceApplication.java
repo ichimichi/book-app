@@ -9,17 +9,16 @@ import org.springframework.context.annotation.Bean;
 
 import com.stackroute.bookapp.FavouriteService.config.JWTFilter;
 
+
 @SpringBootApplication
 public class FavouriteServiceApplication {
 	
 	@Bean
-	public FilterRegistrationBean<JWTFilter> filterRegistrationBean(){
-		FilterRegistrationBean<JWTFilter> filter = new FilterRegistrationBean<>();
-		filter.addUrlPatterns("/");
-		filter.setFilter(new JWTFilter());
-		return filter;
-		
-		
+	public FilterRegistrationBean<JWTFilter> jwtFilter() {
+		FilterRegistrationBean<JWTFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+		filterRegistrationBean.addUrlPatterns("/api/v1/fav");
+		filterRegistrationBean.setFilter(new JWTFilter());
+		return filterRegistrationBean;
 	}
 
 	public static void main(String[] args) {

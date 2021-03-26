@@ -29,7 +29,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	@Override
 	public boolean addBook(Book book, String UserId) throws BookAlreadyExistsException {
 
 		boolean status = false;
@@ -64,6 +64,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 		}
 		return status;
 	}
+	@Override
 	public boolean removeBook(Book book,String UserId)throws BookNotFoundException{
 		
 		boolean status = false;
@@ -98,6 +99,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 		return status;
 		
 	}
+	@Override
 	public boolean deleteAllBooks(String UserId)throws UserNotFoundException{
 		boolean status = false;
 		User user = new User();
@@ -119,6 +121,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 		return status;
 		
 	}
+	@Override
 	public List<Book>getAllBooksByUserId(String userId)throws UserNotFoundException{
 		
 		List<Book> books = new ArrayList<>();
