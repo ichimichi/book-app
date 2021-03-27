@@ -32,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SearchResultComponent,
     BookCardComponent,
     BookDetailsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

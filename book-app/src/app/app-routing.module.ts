@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FavouriteComponent } from './components/favourite/favourite.component';
 import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RecommendationComponent } from './components/recommendation/recommendation.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -52,8 +53,10 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
       },
+      { path: '**', component: PageNotFoundComponent },
     ],
   },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
