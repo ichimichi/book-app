@@ -21,6 +21,9 @@ import { RecommendationService } from './services/recommendation.service';
 import { GoogleBooksService } from './services/google-books.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     RecommendationComponent,
     ProfileImageUploadComponent,
     ProfileInterestSelectComponent,
+    SearchResultComponent,
+    BookCardComponent,
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,
