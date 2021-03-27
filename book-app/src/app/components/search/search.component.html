@@ -1,35 +1,45 @@
-<mat-grid-list cols="2" rowHeight="100px" class="background">
-  <mat-grid-tile colspan="2">
-    <mat-card class="card drop-shadow">
-      <form [formGroup]="searchForm" class="content">
-        <mat-form-field class="input">
-          <mat-label>Search for a book here</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="searchQuery"
-            placeholder="Search for a book here"
-          />
+<div class="container">
+  <div class="background">
+    <mat-card class="drop-shadow card">
+      <div class="card-content">
+        <form [formGroup]="searchForm" class="text-center">
+          <div>
+            <img
+              src="../../../assets/books-icon.svg"
+              class="card-icon"
+              alt="logo"
+            />
+          </div>
+          <mat-form-field class="input-field m-1" appearance="outline">
+            <mat-label>Search for a book here</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="searchQuery"
+              placeholder="Search for a book here"
+            />
+            <button
+              mat-button
+              *ngIf="searchForm.value.searchQuery"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="searchForm.patchValue({ searchQuery: '' })"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <br />
           <button
-            mat-button
-            *ngIf="searchForm.value.searchQuery"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="searchForm.patchValue({ searchQuery: '' })"
+            class="m-1 btn"
+            mat-raised-button
+            color="primary"
+            (click)="search()"
           >
-            <mat-icon>close</mat-icon>
+            Search
           </button>
-        </mat-form-field>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="search()"
-          class="btn"
-        >
-          Search
-        </button>
-      </form></mat-card
-    >
-  </mat-grid-tile>
-</mat-grid-list>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -15,9 +15,11 @@ a {
 }
 
 .drop-shadow {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
 }
 
-.content {
-  padding: 1em 1em 1em 1em;
+.container {
+  display: grid;
+  grid-template-rows: 94vh;
+  grid-gap: 0px 0px;
 }
