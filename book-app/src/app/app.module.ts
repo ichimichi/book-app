@@ -25,6 +25,13 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +56,12 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatGridListModule,
+    MatCardModule,
   ],
   providers: [
     UserAuthenticationService,

@@ -1,1 +1,35 @@
-<p>search works!</p>
+<mat-grid-list cols="2" rowHeight="100px" class="background">
+  <mat-grid-tile colspan="2">
+    <mat-card class="card drop-shadow">
+      <form [formGroup]="searchForm" class="content">
+        <mat-form-field class="input">
+          <mat-label>Search for a book here</mat-labelt
+          <input
+            matInput
+            type="text"
+            formControlName="searchQuery"
+            placeholder="Search for a book here"
+          />
+          <button
+            mat-button
+            *ngIf="searchForm.value.searchQuery"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="searchForm.patchValue({ searchQuery: '' })"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="search()"
+          class="btn"
+        >
+          Search
+        </button>
+      </form></mat-card
+    >
+  </mat-grid-tile>
+</mat-grid-list>

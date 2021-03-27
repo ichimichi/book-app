@@ -1,0 +1,13 @@
+.background {
+  min-height: 100vh;
+  background-color: whitesmoke;
+  background-image: url("./../../../assets/bg2.svg");
+}
+
+.input {
+  min-width: 400px;
+}
+
+.btn {
+  margin-left: 5px;
+}

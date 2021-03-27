@@ -25,6 +25,11 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'search',
+        pathMatch: 'full',
+      },
+      {
         path: 'search',
         component: SearchComponent,
       },
