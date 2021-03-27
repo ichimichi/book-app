@@ -14,6 +14,11 @@ import { RecommendationComponent } from './components/recommendation/recommendat
 import { ProfileImageUploadComponent } from './components/profile-image-upload/profile-image-upload.component';
 import { ProfileInterestSelectComponent } from './components/profile-interest-select/profile-interest-select.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserAuthenticationService } from './services/user-authentication.service';
+import { UserService } from './services/user.service';
+import { FavouriteService } from './services/favourite.service';
+import { RecommendationService } from './services/recommendation.service';
+import { GoogleBooksService } from './services/google-books.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProfileInterestSelectComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
-  providers: [],
+  providers: [
+    UserAuthenticationService,
+    UserService,
+    FavouriteService,
+    RecommendationService,
+    GoogleBooksService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
