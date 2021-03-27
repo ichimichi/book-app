@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GoogleBooksService } from 'src/app/services/google-books.service';
 
 @Component({
   selector: 'app-search',
@@ -11,13 +12,23 @@ export class SearchComponent implements OnInit {
     searchQuery: new FormControl('', [Validators.required]),
   });
 
-  constructor() {}
+  constructor(private googleBooksService: GoogleBooksService) {}
 
   ngOnInit(): void {}
 
   search() {
     if (this.searchForm.valid) {
       console.log(this.searchForm.value);
+      this.googleBooksService
+        .search(this.searchForm.value.searchQuery)
+        .subscribe(
+          (res: any) => {
+            console.log(res.items);
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
     } else {
       alert('something wrong');
     }
