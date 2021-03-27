@@ -19,6 +19,8 @@ import { UserService } from './services/user.service';
 import { FavouriteService } from './services/favourite.service';
 import { RecommendationService } from './services/recommendation.service';
 import { GoogleBooksService } from './services/google-books.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,14 @@ import { GoogleBooksService } from './services/google-books.service';
     ProfileImageUploadComponent,
     ProfileInterestSelectComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     UserAuthenticationService,
     UserService,
