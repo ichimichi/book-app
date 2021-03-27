@@ -54,14 +54,14 @@ public class JwtFilter extends GenericFilterBean {
 				String token = authHeader.split(" ")[1];
 				Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).getBody();
 				request.setAttribute("claims", claims);
-				chain.doFilter(request, response);
+				
 			} catch (SignatureException ex) {
 	            throw new ServletException("Invalid Token");
 	        } catch (MalformedJwtException ex) {
 	            throw new ServletException("JWT is malformed");
 	        }
 
-	        
+			chain.doFilter(request, response);
 		}
 
 	}
