@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.bookapp.UserAuthenticationService.exception.*;
 import com.stackroute.bookapp.UserAuthenticationService.model.User;
-import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationService;
 import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationServiceImpl;
 
 import io.jsonwebtoken.Jwts;
@@ -42,8 +41,8 @@ public class UserAuthenticationController {
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody User user) {
 		try {
-			service.findByUserIdAndPassword(user.getUserId(), user.getUserPassword());
-			return new ResponseEntity<String>(getToken(user.getUserId(), user.getUserPassword()), HttpStatus.OK);
+			service.findByUserIdAndPassword(user.getId(), user.getPassword());
+			return new ResponseEntity<String>(getToken(user.getId(), user.getPassword()), HttpStatus.OK);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
@@ -51,8 +50,8 @@ public class UserAuthenticationController {
 		}
 	}
 
-	public String getToken(String userId, String password) throws Exception {
-		return Jwts.builder().setId(userId).setSubject(password).setIssuedAt(new Date())
+	public String getToken(String id, String password) throws Exception {
+		return Jwts.builder().setId(id).setSubject(password).setIssuedAt(new Date())
 				.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
 
 	}

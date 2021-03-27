@@ -6,6 +6,6 @@ import com.stackroute.bookapp.UserAuthenticationService.model.User;
 
 public interface UserAuthenticationRepository extends JpaRepository<User, String> 
 {
-	User findByUserIdAndUserPassword(String userId, String userPassword);
+	User findByIdAndPassword(String id, String password);
 }
 

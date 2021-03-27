@@ -19,8 +19,8 @@ public class UserAuthenticationServiceImpl
 		this.repository = repository;
 	}
 	
-	public User findByUserIdAndPassword(String userId, String password) throws UserNotFoundException {
-		User user=repository.findByUserIdAndUserPassword(userId, password);
+	public User findByUserIdAndPassword(String id, String password) throws UserNotFoundException {
+		User user=repository.findByIdAndPassword(id, password);
 		if(user ==null) {
 			throw new UserNotFoundException("User is not found");
 		}
@@ -29,7 +29,7 @@ public class UserAuthenticationServiceImpl
 	
 	public boolean saveUser(User user) throws UserAlreadyExistException 
 	{
-		java.util.Optional<User> optional=repository.findById(user.getUserId());
+		java.util.Optional<User> optional=repository.findById(user.getId());
 		if(optional.isPresent())
 		{
 			throw new UserAlreadyExistException("user already exist");
