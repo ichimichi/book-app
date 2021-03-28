@@ -9,29 +9,25 @@ import com.stackroute.bookapp.UserAuthenticationService.model.User;
 import com.stackroute.bookapp.UserAuthenticationService.repository.UserAuthenticationRepository;
 
 @Service
-public class UserAuthenticationServiceImpl 
-{
+public class UserAuthenticationServiceImpl {
 	@Autowired
 	UserAuthenticationRepository repository;
 
-	public UserAuthenticationServiceImpl(UserAuthenticationRepository repository)
-	{
+	public UserAuthenticationServiceImpl(UserAuthenticationRepository repository) {
 		this.repository = repository;
 	}
-	
-	public User findByUserIdAndPassword(String id, String password) throws UserNotFoundException {
-		User user=repository.findByIdAndPassword(id, password);
-		if(user ==null) {
+
+	public User findByEmailAndPassword(String email, String password) throws UserNotFoundException {
+		User user = repository.findByEmailAndPassword(email, password);
+		if (user == null) {
 			throw new UserNotFoundException("User is not found");
 		}
 		return user;
 	}
-	
-	public boolean saveUser(User user) throws UserAlreadyExistException 
-	{
-		java.util.Optional<User> optional=repository.findById(user.getId());
-		if(optional.isPresent())
-		{
+
+	public boolean saveUser(User user) throws UserAlreadyExistException {
+		java.util.Optional<User> optional = repository.findByEmail(user.getEmail());
+		if (optional.isPresent()) {
 			throw new UserAlreadyExistException("user already exist");
 		}
 		repository.save(user);

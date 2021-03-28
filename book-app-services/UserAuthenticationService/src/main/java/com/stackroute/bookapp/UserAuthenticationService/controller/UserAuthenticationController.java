@@ -29,10 +29,11 @@ public class UserAuthenticationController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestBody User user) {
+	public ResponseEntity<?> register(@RequestBody User user) {
 		try {
 			service.saveUser(user);
-			return new ResponseEntity<String>("Created", HttpStatus.CREATED);
+			user.setPassword(null);
+			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		} catch (UserAlreadyExistException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}
@@ -41,8 +42,8 @@ public class UserAuthenticationController {
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody User user) {
 		try {
-			service.findByUserIdAndPassword(user.getId(), user.getPassword());
-			return new ResponseEntity<String>(getToken(user.getId(), user.getPassword()), HttpStatus.OK);
+			service.findByEmailAndPassword(user.getEmail(), user.getPassword());
+			return new ResponseEntity<String>(getToken(user.getEmail(), user.getPassword()), HttpStatus.OK);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
