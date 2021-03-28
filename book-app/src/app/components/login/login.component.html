@@ -1,1 +1,45 @@
-<p>login works!</p>
+<div class="container">
+  <div class="background">
+    <mat-card class="drop-shadow card">
+      <div class="card-content">
+        <form [formGroup]="loginForm" class="text-center">
+          <div>
+            <h2>Login to your account</h2>
+          </div>
+          <div>
+            <mat-form-field class="input-field m-1" appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="email"
+                placeholder="E-mail"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="input-field m-1" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              class="m-1 btn"
+              mat-raised-button
+              color="primary"
+              (click)="login()"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>
