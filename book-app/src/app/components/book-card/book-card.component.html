@@ -1,1 +1,19 @@
-<p>book-card works!</p>
+<mat-card class="example-card rounded-corner drop-shadow">
+  <mat-card-header>
+    <mat-card-title>{{ book!.volumeInfo.title }}</mat-card-title>
+    <mat-card-subtitle>{{ book!.volumeInfo.authors }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    [src]="getThumbnail(book!.volumeInfo.imageLinks)"
+    alt="cover"
+  />
+  <mat-card-content>
+    <p>
+      {{ book!.volumeInfo.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>Add to Favourite</button>
+  </mat-card-actions>
+</mat-card>
