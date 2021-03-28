@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stackroute.bookapp.RecommendationService.exception.BookAlreadyExistsException;
 import com.stackroute.bookapp.RecommendationService.model.Book;
 import com.stackroute.bookapp.RecommendationService.service.RecommendationServiceImpl;
 
@@ -41,8 +42,8 @@ public class RecommendationController {
 	public ResponseEntity<?> addtoRecommendations(@RequestParam String userId, @RequestBody Book book){
 		try {
 			return new ResponseEntity<Book>(recommendationService.addtoRecommendations(book, userId), HttpStatus.OK);
-		}catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}catch (BookAlreadyExistsException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}
 	}
 	
