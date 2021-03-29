@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from '../models/user';
 import { LocalStorageService } from './local-storage.service';
 import { RouterService } from './router.service';
 
@@ -29,6 +30,22 @@ export class UserAuthenticationService {
         console.error(err);
       }
     );
+  }
+  register(user: User) {
+    return this.httpClient
+      .post(`${this.api_endpoint}/register`, user)
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          // this.localStrorageService.setToken(res.token);
+          alert('Registration Successfull!');
+          this.routerService.goToLogin();
+        },
+        (err) => {
+          alert('Invalid credentials');
+          console.error(err);
+        }
+      );
   }
 
   isLoggedIn() {
