@@ -4,13 +4,16 @@ import java.util.List;
 
 import com.stackroute.bookapp.RecommendationService.exception.BookAlreadyExistsException;
 import com.stackroute.bookapp.RecommendationService.exception.BookNotFoundException;
+import com.stackroute.bookapp.RecommendationService.exception.NoRecommendationsExists;
+import com.stackroute.bookapp.RecommendationService.exception.RecommendationAlreadyExists;
 import com.stackroute.bookapp.RecommendationService.exception.UserNotFoundException;
 import com.stackroute.bookapp.RecommendationService.model.Book;
+import com.stackroute.bookapp.RecommendationService.model.Recommendation;
 
 public interface RecommendationService {
-	List<Book> getAllRecommendedBooks(String userId) throws UserNotFoundException;
+	List<Recommendation> getAllRecommendedBooks(String userId) throws NoRecommendationsExists;
 
-	Book removeBookByUser(String bookId, String userId) throws BookNotFoundException, UserNotFoundException;
+	boolean removeBookByUser(String bookId, String userId) throws BookNotFoundException, UserNotFoundException;
 
-	Book addtoRecommendations(Book book, String userId) throws BookAlreadyExistsException;
+	Book addtoRecommendations(Book book, String userId) throws RecommendationAlreadyExists;
 }

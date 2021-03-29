@@ -9,8 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Recommendation {
 	@Id
 	private String id;
-	private String userId;
-	private List<Book> books;
+	private List<String> users;
+	private String bookId;
+	private Book book;
 	
 	public Recommendation() {
 		super();
@@ -24,21 +25,30 @@ public class Recommendation {
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
+	public List<String> getUsers() {
+		return users;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUsers(List<String> users) {
+		this.users = users;
 	}
 
-	public List getBooks() {
-		return books;
+	public Book getBook() {
+		return book;
 	}
 
-	public void setBooks(List books) {
-		this.books = books;
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public String getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
 	}
 	
+
 	
 }
