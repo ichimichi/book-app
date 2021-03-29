@@ -65,7 +65,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 		return status;
 	}
 	@Override
-	public boolean removeBook(Book book,String UserId)throws BookNotFoundException{
+	public boolean removeBook(String bookId,String UserId)throws BookNotFoundException{
 		
 		boolean status = false;
 		User user = new User();
@@ -78,7 +78,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 			while (iterator.hasNext()) {
 
 				temp = (Book) (iterator.next());
-				if (temp.getId().equals(book.getId())) {
+				if (temp.getId().equals(bookId)) {
 					check=true;
 					iterator.remove();
 				}

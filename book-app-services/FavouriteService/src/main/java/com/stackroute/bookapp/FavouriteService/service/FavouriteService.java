@@ -11,7 +11,7 @@ public interface FavouriteService {
 
 	
 		boolean addBook(Book book,String userId) throws BookAlreadyExistsException;
-		boolean removeBook(Book book,String UserId) throws BookNotFoundException;
+		boolean removeBook(String bookId,String UserId) throws BookNotFoundException;
 		boolean deleteAllBooks(String userId)throws UserNotFoundException;
 		List<Book>getAllBooksByUserId(String userId)throws UserNotFoundException;
 		
