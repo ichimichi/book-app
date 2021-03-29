@@ -10,4 +10,7 @@ export class RouterService {
   goToDashboard() {
     this.router.navigate(['/dashboard/search']);
   }
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
 }
