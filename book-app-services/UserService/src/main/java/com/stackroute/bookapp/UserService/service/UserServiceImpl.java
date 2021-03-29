@@ -1,46 +1,44 @@
 package com.stackroute.bookapp.UserService.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stackroute.bookapp.UserService.exception.InterestAlreadyExistsException;
 import com.stackroute.bookapp.UserService.exception.UserAlreadyExistsException;
 import com.stackroute.bookapp.UserService.exception.UserNotFoundException;
 import com.stackroute.bookapp.UserService.model.User;
 import com.stackroute.bookapp.UserService.repository.UserRepository;
+
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository repository;
 
-	public UserServiceImpl(UserRepository repository) {
-		this.repository = repository;
-	}
-
 	public User registerUser(User user) throws UserAlreadyExistsException {
 		User savedUser = null;
-		if (repository.existsById(user.getId())) {
-			throw new UserAlreadyExistsException("User with ID" + user.getId() + "already exists");
+		if (repository.existsByEmail(user.getEmail())) {
+			throw new UserAlreadyExistsException("User with ID" + user.getEmail() + "already exists");
 		} else {
-			user.setDob((java.sql.Date) new Date());
 			savedUser = repository.insert(user);
 			if (savedUser == null) {
-				throw new UserAlreadyExistsException("User with ID" + user.getId() + "already exists");
+				throw new UserAlreadyExistsException("User with ID" + user.getEmail() + "already exists");
 			}
 		}
 		return savedUser;
 	}
 
-	public User updateUser(String id, User user) throws UserNotFoundException {
+	public User updateUser(String email, User user) throws UserNotFoundException {
 
 		try {
-			User fecthedUser = repository.findById(id).get();
+			User fecthedUser = repository.findByEmail(email);
 			fecthedUser.setName(user.getName());
-			fecthedUser.setEmail(user.getEmail());
-			fecthedUser.setPassword(user.getPassword());
-			fecthedUser.setId(user.getId());
+			fecthedUser.setDob(user.getDob());
 
 			repository.save(fecthedUser);
 			return fecthedUser;
@@ -52,10 +50,10 @@ public class UserServiceImpl implements UserService{
 
 	}
 
-	public boolean deleteUser(String id) throws UserNotFoundException {
+	public boolean deleteUser(String email) throws UserNotFoundException {
 		boolean status = false;
 		try {
-			User fecthedUser = repository.findById(id).get();
+			User fecthedUser = repository.findByEmail(email);
 			if (fecthedUser != null) {
 				repository.delete(fecthedUser);
 				status = true;
@@ -65,11 +63,40 @@ public class UserServiceImpl implements UserService{
 		}
 		return status;
 	}
-	public User getUserById(String id) throws UserNotFoundException {
-		User fecthedUser = repository.findById(id).get();
+
+	public User getUserById(String email) throws UserNotFoundException {
+		User fecthedUser = repository.findByEmail(email);
 		if (fecthedUser == null) {
 			throw new UserNotFoundException("User does not exists");
 		}
 		return fecthedUser;
+	}
+
+	public User addToInterests(String email, String interest) throws InterestAlreadyExistsException, UserNotFoundException {
+		if (repository.existsByEmail(email)) {
+			User user = repository.findByEmail(email);
+			List<String> interestList = user.getInterests();
+			if(interestList==null) {
+				interestList = new ArrayList<String>();
+			}
+			
+			Iterator iterator = interestList.iterator();
+			String interestDb;
+			while (iterator.hasNext()) {
+
+				interestDb = (String) (iterator.next());
+				if (interestDb.equals(interest)) {
+					throw new InterestAlreadyExistsException("Interest Already Exists");
+				}
+			}
+
+			interestList.add(interest);
+			user.setInterests(interestList);
+			repository.save(user);
+			return user;
+
+		} else {
+			throw new UserNotFoundException("user with email "+ email+" does not exists");
+		}
 	}
 }
