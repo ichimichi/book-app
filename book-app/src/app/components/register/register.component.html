@@ -8,7 +8,18 @@
               <h2>Sign Up with Your Email</h2>
             </div>
             <div>
-              <mat-form-field class="input-field m-1" appearance="outline">
+                <mat-form-field class="input-field m-5" appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    formControlName="username"
+                    placeholder="Name"
+                  />
+                </mat-form-field>
+              </div>
+            <div>
+              <mat-form-field class="input-field m-5" appearance="outline">
                 <mat-label>E-mail</mat-label>
                 <input
                   matInput
@@ -19,7 +30,7 @@
               </mat-form-field>
             </div>
             <div>
-              <mat-form-field class="input-field m-1" appearance="outline">
+              <mat-form-field class="input-field m-5" appearance="outline">
                 <mat-label>Password</mat-label>
                 <input
                   matInput
@@ -28,10 +39,19 @@
                   placeholder="Password"
                 />
               </mat-form-field>
+              
+            </div>
+            <div>
+                <mat-form-field class="input-field m-5" appearance="outline">
+                    <mat-label>Enter Date Of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
             </div>
             <div>
               <button
-                class="m-1 btn"
+                class="m-5 btn"
                 mat-raised-button
                 color="primary"
                 (click)="register()"

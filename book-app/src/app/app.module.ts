@@ -33,6 +33,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -66,6 +69,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MatGridListModule,
     MatCardModule,
     MatTooltipModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule
   ],
   providers: [
     UserAuthenticationService,

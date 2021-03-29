@@ -13,6 +13,10 @@ export class RegisterComponent implements OnInit {
   registerForm=new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
+    username:new FormControl('', [Validators.required]),
+    date:new FormControl('', [Validators.required]),
+
+
   });
 
   constructor(
