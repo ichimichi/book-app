@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.bookapp.UserAuthenticationService.exception.*;
+import com.stackroute.bookapp.UserAuthenticationService.model.Payload;
 import com.stackroute.bookapp.UserAuthenticationService.model.User;
 import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationServiceImpl;
 
@@ -19,13 +21,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/v1/auth")
 public class UserAuthenticationController {
 	@Autowired
 	UserAuthenticationServiceImpl service;
 
 	public UserAuthenticationController() {
-		
+
 	}
 
 	@PostMapping("/register")
@@ -40,10 +43,12 @@ public class UserAuthenticationController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody User user) {
+	public ResponseEntity<?> login(@RequestBody User user) {
 		try {
 			service.findByEmailAndPassword(user.getEmail(), user.getPassword());
-			return new ResponseEntity<String>(getToken(user.getEmail(), user.getPassword()), HttpStatus.OK);
+			Payload payload = new Payload();
+			payload.setToken(getToken(user.getEmail(), user.getPassword()));
+			return new ResponseEntity<Payload>(payload, HttpStatus.OK);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
