@@ -1,1 +1,9 @@
-<p>recommendation works!</p>
+<div class="container">
+  <div class="cards">
+    <div *ngFor="let book of bookList">
+      <div style="margin-bottom: 1rem">
+        <app-book-card-recommend [book]="book"></app-book-card-recommend>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,9 @@
 spring:
   data:
     mongodb:
-      database: "BookAppDB"
+      database: BookAppDB
       port: 27017
-      host: "localhost"
-  application:
-    name: recommendation-service
+      host: db-mongo
 server:
   port: 8083
 

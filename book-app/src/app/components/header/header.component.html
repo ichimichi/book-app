@@ -4,6 +4,7 @@
   >
   <span class="example-spacer"></span>
   <button
+    *ngIf="isLoggedIn()"
     mat-icon-button
     aria-label="favourite"
     matTooltip="favourite"
@@ -12,6 +13,7 @@
     <mat-icon>favorite</mat-icon>
   </button>
   <button
+    *ngIf="isLoggedIn()"
     mat-icon-button
     aria-label="recommendation"
     matTooltip="recommendation"
@@ -20,6 +22,7 @@
     <mat-icon>recommend</mat-icon>
   </button>
   <button
+    *ngIf="isLoggedIn()"
     mat-icon-button
     aria-label="profile"
     matTooltip="profile"
@@ -28,6 +31,7 @@
     <mat-icon>person</mat-icon>
   </button>
   <button
+    *ngIf="!isLoggedIn()"
     mat-icon-button
     aria-label="register"
     matTooltip="register"
@@ -36,6 +40,7 @@
     <mat-icon>add_box</mat-icon>
   </button>
   <button
+    *ngIf="!isLoggedIn()"
     mat-icon-button
     aria-label="login"
     matTooltip="login"
@@ -44,10 +49,11 @@
     <mat-icon>login</mat-icon>
   </button>
   <button
+    *ngIf="isLoggedIn()"
     mat-icon-button
     aria-label="logout"
     matTooltip="logout"
-    routerLink="/logout"
+    (click)="handleLogout()"
   >
     <mat-icon>logout</mat-icon>
   </button>

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stackroute.bookapp.RecommendationService.exception.BookAlreadyExistsException;
 import com.stackroute.bookapp.RecommendationService.exception.BookNotFoundException;
 import com.stackroute.bookapp.RecommendationService.exception.UserNotFoundException;
 import com.stackroute.bookapp.RecommendationService.model.Book;
@@ -31,41 +32,51 @@ public class RecommendationServiceImpl implements RecommendationService {
 	}
 
 	@Override
-	public Book removeBookByUser(Book book, String userId) throws BookNotFoundException, UserNotFoundException {
+	public Book removeBookByUser(String bookId, String userId) throws BookNotFoundException, UserNotFoundException {
 		// TODO Auto-generated method stub
 		Book deletedBook = null;
 		if (recommendationRepository.existsByUserId(userId)) {
 			Recommendation rec = recommendationRepository.findByUserId(userId);
 			List bookList = rec.getBooks();
-			
+
 			Iterator iterator = bookList.listIterator();
-			
+
 			while (iterator.hasNext()) {
 				Book b = (Book) iterator.next();
-				if (b.getId().equals(book.getId())) {
+				if (b.getId().equals(bookId)) {
 					iterator.remove();
 					deletedBook = b;
 				}
 			}
 			rec.setBooks(bookList);
 			recommendationRepository.save(rec);
-			if(deletedBook!=null) {
-				return deletedBook;	
-			}else {
+			if (deletedBook != null) {
+				return deletedBook;
+			} else {
 				throw new BookNotFoundException("Book not found");
 			}
-			
+
 		} else {
 			throw new UserNotFoundException(userId);
 		}
 	}
 
 	@Override
-	public Book addtoRecommendations(Book book, String userId) {
+	public Book addtoRecommendations(Book book, String userId) throws BookAlreadyExistsException {
 		// TODO Auto-generated method stub
 		if (recommendationRepository.existsByUserId(userId)) {
 			Recommendation rec = recommendationRepository.findByUserId(userId);
 			List bookList = rec.getBooks();
+			Iterator iterator = bookList.iterator();
+			Book temp = new Book();
+			while (iterator.hasNext()) {
+
+				temp = (Book) (iterator.next());
+				if (temp.getId().equals(book.getId())) {
+					throw new BookAlreadyExistsException("Book Already Exists");
+				}
+			}
+
 			bookList.add(book);
 			rec.setBooks(bookList);
 			recommendationRepository.save(rec);

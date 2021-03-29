@@ -18,13 +18,13 @@
 }
 
 .card-content {
-  min-width: 400px;
+  min-width: 100%;
   justify-self: center;
   align-self: center;
 }
 
 .input-field {
-  min-width: 400px;
+  min-width: 300px;
 }
 
 .m-1 {
@@ -43,4 +43,12 @@
 .btn {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+@media (min-width: 780px) {
+  .card-content {
+    min-width: 400px;
+    justify-self: center;
+    align-self: center;
+  }
 }

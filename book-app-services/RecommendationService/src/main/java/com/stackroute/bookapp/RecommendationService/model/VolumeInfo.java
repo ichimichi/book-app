@@ -10,7 +10,7 @@ public class VolumeInfo {
 	private Date publishedDate;
 	private String description;
 	private List<IndustryIdentifier> industryIdentifiers;
-	private String pageCount;
+	private int pageCount;
 	private List<String> categories;
 	private String averageRating;
 	private int ratingsCount;
@@ -70,11 +70,11 @@ public class VolumeInfo {
 		this.industryIdentifiers = industryIdentifiers;
 	}
 
-	public String getPageCount() {
+	public int getPageCount() {
 		return pageCount;
 	}
 
-	public void setPageCount(String pageCount) {
+	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
 

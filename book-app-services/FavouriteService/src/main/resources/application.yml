@@ -1,9 +1,9 @@
 spring:
  data:
    mongodb:
-     database: FavDB
+     database: BookAppDB
      port: 27017
-     host: localhost
+     host: db-mongo
 server:
  port: 8082
 

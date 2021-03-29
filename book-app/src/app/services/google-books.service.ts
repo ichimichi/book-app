@@ -14,6 +14,7 @@ export class GoogleBooksService {
       params: {
         key: this.key,
         q: query,
+        maxResults: '40',
       },
     });
   }

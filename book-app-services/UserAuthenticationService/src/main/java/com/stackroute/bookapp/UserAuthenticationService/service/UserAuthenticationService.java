@@ -6,7 +6,7 @@ import com.stackroute.bookapp.UserAuthenticationService.model.User;
 
 public interface UserAuthenticationService 
 {
-	public User findByUserIdAndPassword(String userId, String password) throws UserNotFoundException;
+	public User findByEmailAndPassword(String email, String password) throws UserNotFoundException;
 
     boolean saveUser(User user) throws UserAlreadyExistException;
 }
