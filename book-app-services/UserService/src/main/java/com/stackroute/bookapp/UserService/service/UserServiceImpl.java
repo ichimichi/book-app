@@ -99,4 +99,13 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotFoundException("user with email "+ email+" does not exists");
 		}
 	}
+
+	@Override
+	public List<String> getAllInterest(String email) throws UserNotFoundException {
+		User fecthedUser = repository.findByEmail(email);
+		if (fecthedUser == null) {
+			throw new UserNotFoundException("User does not exists");
+		}
+		return fecthedUser.getInterests();
+	}
 }

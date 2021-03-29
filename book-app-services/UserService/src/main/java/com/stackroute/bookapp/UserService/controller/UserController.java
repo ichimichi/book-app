@@ -86,4 +86,14 @@ public class UserController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}
 	}
+
+	@GetMapping("/interest")
+	public ResponseEntity<?> getAllInterest(@RequestAttribute Claims claims) {
+		try {
+			List interestList = service.getAllInterest(claims.getId());
+			return new ResponseEntity<List>(interestList, HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
 }

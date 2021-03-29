@@ -1,5 +1,7 @@
 package com.stackroute.bookapp.UserService.service;
 
+import java.util.List;
+
 import com.stackroute.bookapp.UserService.exception.InterestAlreadyExistsException;
 import com.stackroute.bookapp.UserService.exception.UserAlreadyExistsException;
 import com.stackroute.bookapp.UserService.exception.UserNotFoundException;
@@ -12,4 +14,5 @@ public interface UserService {
     boolean deleteUser(String id) throws UserNotFoundException;
     User getUserById(String id) throws UserNotFoundException;
     User addToInterests(String email, String interest) throws InterestAlreadyExistsException, UserNotFoundException;
+    List<String> getAllInterest(String email) throws UserNotFoundException;
 }
