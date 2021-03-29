@@ -4,12 +4,13 @@ import java.util.Date;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.stackroute.bookapp.UserService.exception.UserAlreadyExistsException;
 import com.stackroute.bookapp.UserService.exception.UserNotFoundException;
 import com.stackroute.bookapp.UserService.model.User;
 import com.stackroute.bookapp.UserService.repository.UserRepository;
-
+@Service
 public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository repository;
