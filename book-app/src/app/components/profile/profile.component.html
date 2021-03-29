@@ -1,1 +1,23 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="cards">
+    <mat-card class="example-card rounded-corner drop-shadow">
+      <mat-card-header>
+        <mat-card-title>{{ user!.name | uppercase }}</mat-card-title>
+        <mat-card-subtitle>{{ user!.email }}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="./../../../assets/profile.svg" alt="cover" />
+      <mat-card-content>
+        <div class="text-center">
+          Hello {{ user!.name | titlecase }}, How are you doing?
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="text-right">
+          <button mat-icon-button aria-label="edit profile" matTooltip="edit">
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

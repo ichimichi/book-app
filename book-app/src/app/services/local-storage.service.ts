@@ -17,4 +17,28 @@ export class LocalStorageService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+  setEmail(email: any) {
+    localStorage.setItem('email', email);
+  }
+
+  getEmail() {
+    return localStorage.getItem('email');
+  }
+
+  removeEmail() {
+    localStorage.removeItem('email');
+  }
+
+  setName(name: any) {
+    localStorage.setItem('name', name);
+  }
+
+  getName() {
+    return localStorage.getItem('name');
+  }
+
+  removeName() {
+    localStorage.removeItem('name');
+  }
 }

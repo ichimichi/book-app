@@ -22,6 +22,8 @@ export class UserAuthenticationService {
       (res: any) => {
         console.log(res);
         this.localStrorageService.setToken(res.token);
+        this.localStrorageService.setName(res.user.name);
+        this.localStrorageService.setEmail(res.user.email);
         alert('Welcome!');
         this.routerService.goToDashboard();
       },
@@ -31,6 +33,7 @@ export class UserAuthenticationService {
       }
     );
   }
+
   register(user: User) {
     return this.httpClient
       .post(`${this.api_endpoint}/register`, user)

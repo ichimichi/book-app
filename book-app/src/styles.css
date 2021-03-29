@@ -18,6 +18,14 @@ a {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
 .container {
   display: grid;
   grid-template-rows: 100vh;
