@@ -55,10 +55,10 @@ public class RecommendationController {
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<?> removeBookByUser(@RequestAttribute Claims claims, @RequestParam String userId, @RequestBody Book book){
+	public ResponseEntity<?> removeBookByUser(@RequestAttribute Claims claims, @RequestParam String bookId){
 		System.out.println(claims.getId());
 		try {
-			return new ResponseEntity<Book>(recommendationService.removeBookByUser(book, claims.getId()), HttpStatus.OK);
+			return new ResponseEntity<Book>(recommendationService.removeBookByUser(bookId, claims.getId()), HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

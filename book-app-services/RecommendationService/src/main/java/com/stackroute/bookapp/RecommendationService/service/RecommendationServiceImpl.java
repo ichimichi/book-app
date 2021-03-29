@@ -32,7 +32,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 	}
 
 	@Override
-	public Book removeBookByUser(Book book, String userId) throws BookNotFoundException, UserNotFoundException {
+	public Book removeBookByUser(String bookId, String userId) throws BookNotFoundException, UserNotFoundException {
 		// TODO Auto-generated method stub
 		Book deletedBook = null;
 		if (recommendationRepository.existsByUserId(userId)) {
@@ -43,7 +43,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 			while (iterator.hasNext()) {
 				Book b = (Book) iterator.next();
-				if (b.getId().equals(book.getId())) {
+				if (b.getId().equals(bookId)) {
 					iterator.remove();
 					deletedBook = b;
 				}
