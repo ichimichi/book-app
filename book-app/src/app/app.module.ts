@@ -36,6 +36,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { BookCardRecommendComponent } from './components/book-card-recommend/book-card-recommend.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     BookCardComponent,
     BookDetailsComponent,
     PageNotFoundComponent,
+    BookCardRecommendComponent,
   ],
   imports: [
     BrowserModule,
