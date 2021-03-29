@@ -34,9 +34,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { BookCardRecommendComponent } from './components/book-card-recommend/book-card-recommend.component';
+import { BookCardFavouriteComponent } from './components/book-card-favourite/book-card-favourite.component';
+// import { BookCardFavouriteComponent } from './book-card-favourite/book-card-favourite.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { BookCardRecommendComponent } from './components/book-card-recommend/boo
     BookDetailsComponent,
     PageNotFoundComponent,
     BookCardRecommendComponent,
+    BookCardFavouriteComponent,
+    // BookCardFavouriteComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,7 @@ import { BookCardRecommendComponent } from './components/book-card-recommend/boo
     MatTooltipModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   providers: [
     UserAuthenticationService,
