@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book';
+import { ImageLinks } from 'src/app/models/image-links';
 import { FavouriteService } from 'src/app/services/favourite.service';
 
 @Component({
