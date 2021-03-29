@@ -4,11 +4,11 @@ import { ImageLinks } from 'src/app/models/image-links';
 import { RecommendationService } from 'src/app/services/recommendation.service';
 
 @Component({
-  selector: 'app-book-card',
-  templateUrl: './book-card.component.html',
-  styleUrls: ['./book-card.component.css'],
+  selector: 'app-book-card-recommend',
+  templateUrl: './book-card-recommend.component.html',
+  styleUrls: ['./book-card-recommend.component.css'],
 })
-export class BookCardComponent implements OnInit {
+export class BookCardRecommendComponent implements OnInit {
   @Input() book: Book | undefined;
   constructor(private recommendationService: RecommendationService) {}
 
@@ -22,11 +22,11 @@ export class BookCardComponent implements OnInit {
     }
   }
 
-  addToRecommended(book: Book) {
-    this.recommendationService.addBook(book).subscribe(
+  removeBook(book: Book) {
+    this.recommendationService.removeBook(book.id).subscribe(
       (res) => {
         console.log(res);
-        alert('Succesfully added book to recommendations');
+        alert('Successfully removed book from recommendations');
       },
       (err) => {
         console.error(err);

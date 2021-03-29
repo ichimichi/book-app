@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { RouterService } from './router.service';
 
@@ -40,5 +39,9 @@ export class UserAuthenticationService {
     this.localStrorageService.removeToken();
     alert('Successfully logged out');
     this.routerService.goToDashboard();
+  }
+
+  getToken() {
+    return this.localStrorageService.getToken();
   }
 }
