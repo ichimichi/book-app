@@ -47,5 +47,12 @@ services:
     ports:
       - "8083:8083"
   
-  
+  user-service:
+    image: user-service
+    build:
+      context: UserService/
+    depends_on:
+      - db-mongo
+    ports:
+      - "8081:8081"
        

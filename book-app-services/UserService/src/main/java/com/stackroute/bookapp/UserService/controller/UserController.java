@@ -17,21 +17,19 @@ import com.stackroute.bookapp.UserService.exception.UserAlreadyExistsException;
 import com.stackroute.bookapp.UserService.exception.UserNotFoundException;
 import com.stackroute.bookapp.UserService.model.User;
 import com.stackroute.bookapp.UserService.service.UserService;
+import com.stackroute.bookapp.UserService.service.UserServiceImpl;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/v1/user")
 public class UserController {
-	UserService service;
+	@Autowired
+	UserServiceImpl service;
 	
 	public UserController() {
 		
 	}
 
-	@Autowired
-	public UserController(UserService service) {
-		this.service = service;
-	}
 	@PostMapping
 	public ResponseEntity<String> create(@RequestBody User user) {
 		try {

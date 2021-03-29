@@ -1,9 +1,9 @@
 package com.stackroute.bookapp.UserService.model;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.sql.Date;
 
-import javax.persistence.Id;
-
+@Document
 public class User 
 {
 	@Id

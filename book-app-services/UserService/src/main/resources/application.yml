@@ -1,6 +1,9 @@
 spring:
-  application:
-    name: user-service
+  data:
+   mongodb:
+     database: BookAppDB
+     port: 27017
+     host: db-mongo
 server:
   port: 8081
 
