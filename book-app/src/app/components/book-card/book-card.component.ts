@@ -33,4 +33,5 @@ export class BookCardComponent implements OnInit {
       }
     );
   }
+  addToFavourite(book: Book) {}
 }
