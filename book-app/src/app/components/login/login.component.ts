@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
+      this.userAuthService.login(this.loginForm.value);
     } else {
       alert('Something went wrong');
     }
