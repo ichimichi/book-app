@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book';
+import { Recommendation } from 'src/app/models/recommendation';
 import { RecommendationService } from 'src/app/services/recommendation.service';
 
 @Component({
@@ -8,14 +9,14 @@ import { RecommendationService } from 'src/app/services/recommendation.service';
   styleUrls: ['./recommendation.component.css'],
 })
 export class RecommendationComponent implements OnInit {
-  bookList: Array<Book> = [];
+  recommendationList: Array<Recommendation> = [];
   constructor(private recommendationService: RecommendationService) {}
 
   ngOnInit(): void {
-    this.recommendationService.getAll().subscribe(
+    this.recommendationService.getAllRecommendations().subscribe(
       (res: any) => {
         console.log(res);
-        this.bookList = res;
+        this.recommendationList = res;
       },
       (err) => {
         console.error(err);

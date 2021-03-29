@@ -1,8 +1,10 @@
 <div class="container">
   <div class="cards">
-    <div *ngFor="let book of bookList">
+    <div *ngFor="let recommendation of recommendationList">
       <div style="margin-bottom: 1rem">
-        <app-book-card-recommend [book]="book"></app-book-card-recommend>
+        <app-book-card-recommend
+          [recommendation]="recommendation"
+        ></app-book-card-recommend>
       </div>
     </div>
   </div>
