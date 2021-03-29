@@ -10,7 +10,7 @@
   />
   <mat-card-content>
     <p>
-      {{ book!.volumeInfo.description }}
+      {{ book!.volumeInfo.description | slice: 0:100 }}
     </p>
   </mat-card-content>
   <mat-card-actions>
