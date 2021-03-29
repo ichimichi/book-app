@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class FavouriteService {
   port = '8082';
-  api_endpoint = `http://localhost:${this.port}/api/v1/auth/fav/?userId=rd125`;
+  api_endpoint = `http://localhost:${this.port}/api/v1/fav/?userId=rd125`;
 
   constructor(private httpClient: HttpClient) {}
   getfavs() {
