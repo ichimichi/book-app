@@ -13,4 +13,14 @@ export class RouterService {
   goToLogin() {
     this.router.navigate(['/login']);
   }
+  goToFavourite() {
+    // this.router.navigateByUrl('/dashboard/favourite', location.reload());
+    this.router.navigate(['/dashboard/recommendation']);
+    this.router.navigate(['/dashboard/favourite']);
+
+    // location.reload();
+  }
+  goToRecommendation() {
+    this.router.navigate(['/dashboard/recommendation']);
+  }
 }

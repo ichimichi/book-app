@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import { ImageLinks } from 'src/app/models/image-links';
+import { FavouriteService } from 'src/app/services/favourite.service';
 import { RecommendationService } from 'src/app/services/recommendation.service';
 
 @Component({
@@ -10,7 +11,10 @@ import { RecommendationService } from 'src/app/services/recommendation.service';
 })
 export class BookCardComponent implements OnInit {
   @Input() book: Book | undefined;
-  constructor(private recommendationService: RecommendationService) {}
+  constructor(
+    private recommendationService: RecommendationService,
+    private favouriteService: FavouriteService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -33,5 +37,15 @@ export class BookCardComponent implements OnInit {
       }
     );
   }
-  addToFavourite(book: Book) {}
+  addToFavourite(book: Book) {
+    this.favouriteService.addBook(book).subscribe(
+      (res) => {
+        console.log(res);
+        alert('Successfully added book to Favourites');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }
