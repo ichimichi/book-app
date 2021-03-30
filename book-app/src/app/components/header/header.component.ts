@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { UserAuthenticationService } from 'src/app/services/user-authentication.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { UserAuthenticationService } from 'src/app/services/user-authentication.
 })
 export class HeaderComponent implements OnInit {
   searchForm = new FormGroup({
-    searchQuery: new FormControl('', [Validators.required]),
+    searchQuery: new FormControl(''),
   });
 
   constructor(
@@ -30,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   search() {
-    if (this.searchForm.valid) {
+    if (this.searchForm.value.searchQuery.length > 0) {
       console.log(this.searchForm.value);
       this.router.navigate(['/dashboard/searchresult'], {
         queryParams: {
