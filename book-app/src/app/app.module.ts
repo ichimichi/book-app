@@ -45,6 +45,7 @@ import {
 import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
 import { RouterService } from './services/router.service';
 import { HomeComponent } from './components/home/home.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { HomeComponent } from './components/home/home.component';
     MatFormFieldModule,
     MatBadgeModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [
     UserAuthenticationService,
