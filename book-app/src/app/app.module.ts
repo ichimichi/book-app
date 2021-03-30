@@ -46,6 +46,8 @@ import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.com
 import { RouterService } from './services/router.service';
 import { HomeComponent } from './components/home/home.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LocalStorageService } from './services/local-storage.service';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RecommendationService,
     GoogleBooksService,
     RouterService,
+    LocalStorageService,
+    AuthGuard,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
   ],
   entryComponents: [MatDialogModule],
