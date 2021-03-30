@@ -20,7 +20,7 @@
       matTooltip="recommend"
       (click)="recommendBook(book!)"
     >
-      <mat-icon>thumb_up</mat-icon>
+      <mat-icon>thumb_up_off_alt</mat-icon>
     </button>
 
     <button
@@ -28,8 +28,18 @@
       aria-label="favourite"
       matTooltip="add to Favourite"
       (click)="addToFavourite(book!)"
+      *ngIf="type !== 'favourite'"
     >
-      <mat-icon>favorite</mat-icon>
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      aria-label="favourite"
+      matTooltip="Remove  from Favourite"
+      (click)="removeFromFavourite(book!)"
+      *ngIf="type === 'favourite'"
+    >
+      <mat-icon color="primary">favorite</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
