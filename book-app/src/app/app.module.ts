@@ -40,6 +40,11 @@ import { BookCardRecommendComponent } from './components/book-card-recommend/boo
 import { BookCardFavouriteComponent } from './components/book-card-favourite/book-card-favourite.component';
 // import { BookCardFavouriteComponent } from './book-card-favourite/book-card-favourite.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import {
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
+import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +66,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     BookCardRecommendComponent,
     BookCardFavouriteComponent,
     // BookCardFavouriteComponent,
+    DialogAlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +86,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatDatepickerModule,
     MatFormFieldModule,
     MatBadgeModule,
+    MatDialogModule,
   ],
   providers: [
     UserAuthenticationService,
@@ -87,7 +94,9 @@ import { MatBadgeModule } from '@angular/material/badge';
     FavouriteService,
     RecommendationService,
     GoogleBooksService,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
   ],
+  entryComponents: [MatDialogModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

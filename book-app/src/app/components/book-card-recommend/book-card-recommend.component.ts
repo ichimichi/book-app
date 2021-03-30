@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import { ImageLinks } from 'src/app/models/image-links';
 import { Recommendation } from 'src/app/models/recommendation';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RecommendationService } from 'src/app/services/recommendation.service';
-import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-book-card-recommend',
@@ -11,10 +11,10 @@ import { RouterService } from 'src/app/services/router.service';
   styleUrls: ['./book-card-recommend.component.css'],
 })
 export class BookCardRecommendComponent implements OnInit {
-  @Input() book: Book | undefined;
+  @Input() recommendation: Recommendation | undefined;
   constructor(
     private recommendationService: RecommendationService,
-    private routerService: RouterService
+    private localStorageSevice: LocalStorageService
   ) {}
 
   ngOnInit(): void {}
@@ -32,7 +32,6 @@ export class BookCardRecommendComponent implements OnInit {
       (res) => {
         console.log(res);
         alert('Successfully removed book from recommendations');
-        // this.routerService.goToRecommendation();
       },
       (err) => {
         console.error(err);
@@ -56,5 +55,9 @@ export class BookCardRecommendComponent implements OnInit {
 
   getNumberOfRecommendations(recommendation: Recommendation) {
     return recommendation.users.length;
+  }
+
+  isAlreadyRecommended(recommendation: Recommendation) {
+    return recommendation.users.includes(this.localStorageSevice.getEmail()!);
   }
 }

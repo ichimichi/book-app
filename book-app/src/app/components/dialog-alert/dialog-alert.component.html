@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>{{ data.message }}</h3>
+  <p>
+    {{ data.description }}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div *ngFor="let text of data.buttonText; let i = index">
+    <button
+      mat-button
+      mat-dialog-close
+      (click)="redirect(data.redirect[i])"
+      *ngIf="i < data.buttonText.length"
+    >
+      {{ text }}
+    </button>
+  </div>
+</mat-dialog-actions>
