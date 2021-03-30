@@ -5,7 +5,11 @@
     >
 
     <span class="example-spacer"></span>
-    <form [formGroup]="searchForm" class="form search-row-1">
+    <form
+      [formGroup]="searchForm"
+      class="form search-row-1"
+      (ngSubmit)="search()"
+    >
       <div>
         <mat-form-field color="white" appearance="outline">
           <mat-label>Search for a book here</mat-label>
@@ -74,7 +78,7 @@
     </button>
   </mat-toolbar-row>
   <mat-toolbar-row class="search-row-2">
-    <form [formGroup]="searchForm" class="sm-form">
+    <form [formGroup]="searchForm" class="sm-form" (ngSubmit)="search()">
       <div>
         <mat-form-field color="white" class="search-input" appearance="outline">
           <mat-label>Search for a book here</mat-label>
