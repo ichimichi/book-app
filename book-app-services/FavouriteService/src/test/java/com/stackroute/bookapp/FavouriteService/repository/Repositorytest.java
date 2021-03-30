@@ -10,10 +10,14 @@ import com.stackroute.bookapp.FavouriteService.model.IndustryIdentifier;
 import com.stackroute.bookapp.FavouriteService.model.User;
 import com.stackroute.bookapp.FavouriteService.model.VolumeInfo;
 
+import static org.hamcrest.CoreMatchers.any;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -22,24 +26,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.mockito.ArgumentMatchers.any;
 
 
-
-@RunWith(SpringRunner.class)
-@DataMongoTest
+@ExtendWith(MockitoExtension.class)
 public class Repositorytest {
 
-	@Autowired
+	@Mock
 	private FavouriteRepository repository;
 	private User user;
 	private Book book;
 	private ImageLinks imageLinks;
 	private IndustryIdentifier industryIdentifier;
 	private VolumeInfo volumeInfo;
+	Optional<User> options,op2;
 	@Before
     public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
 		System.out.println("start");
 		
 		
@@ -72,17 +82,21 @@ public class Repositorytest {
 		user=new User();
 		user.setBookList(Arrays.asList(book));
 		user.setUserId("1");
+		options = Optional.of(user);
+		user.setUserId("2");
+		op2=Optional.of(user);
+		user.setUserId("1");
 	    System.out.println("end");
 		
 		
     }
 	
 	
- @After 
-   public void tearDown() throws Exception {
-
-       repository.deleteAll();
-   }
+// @After 
+//   public void tearDown() throws Exception {
+//
+//       repository.deleteAll();
+//   }
 
 
 
@@ -93,31 +107,37 @@ public class Repositorytest {
 		
 		if(user==null)System.out.println("null user");
 		else System.out.println("not null");
-        repository.insert(user);
+//        repository.insert(user);
 //        Category fetchedCategory = categoryRepository.findById(category.getId()).get();
 //        Assert.assertEquals("5b04f7411764e3765c35f8f6", fetchedCategory.getId());
+        when(repository.findById((String)any())).thenReturn(options);
         User newuser=repository.findById(user.getUserId()).get();
         Assert.assertEquals("1", user.getUserId());
         
     }
-	@Test(expected=NoSuchElementException.class)
+	@Test
 	public void removeUserTest() {
 		
-		repository.insert(user);
+//		repository.insert(user);
+		 when(repository.findById((String)any())).thenReturn(options);
 		User newuser=repository.findById(user.getUserId()).get();
 		Assert.assertEquals("1", newuser.getUserId());
+		
 		repository.delete(newuser);
-		newuser=repository.findById(user.getUserId()).get();
-		
-		
+		when(repository.existsById((String)any())).thenReturn(false);
+		boolean status=repository.existsById(user.getUserId());
+		System.out.println(newuser.getUserId());
+		Assert.assertEquals(false,status);
 	}
 	@Test
 	public void updateUserTest() {
-		repository.insert(user);
+//		repository.insert(user);
+		 when(repository.findById((String)any())).thenReturn(options);
 		User newuser=repository.findById(user.getUserId()).get();
 		Assert.assertEquals("1", newuser.getUserId());
 		newuser.setUserId("2");
 		repository.save(newuser);
+		when(repository.findById((String)any())).thenReturn(op2);
 		newuser=repository.findById(newuser.getUserId()).get();
 		Assert.assertEquals("2", newuser.getUserId());
 		
