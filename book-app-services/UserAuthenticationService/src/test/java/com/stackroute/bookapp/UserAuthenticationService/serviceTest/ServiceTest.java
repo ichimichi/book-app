@@ -1,26 +1,30 @@
-package com.stackroute.bookapp.UserAuthenticationService;
+package com.stackroute.bookapp.UserAuthenticationService.serviceTest;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.Optional;
 
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.stackroute.bookapp.UserAuthenticationService.exception.UserAlreadyExistException;
-import com.stackroute.bookapp.UserAuthenticationService.exception.UserNotFoundException;
 import com.stackroute.bookapp.UserAuthenticationService.model.User;
 import com.stackroute.bookapp.UserAuthenticationService.repository.UserAuthenticationRepository;
 import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationServiceImpl;
 
 
-@SpringBootTest
-class UserAuthenticationServiceApplicationTests {
+
+
+
+@ExtendWith(MockitoExtension.class)
+public class ServiceTest {
 	@Mock
     private UserAuthenticationRepository autheticationRepository;
 
@@ -31,12 +35,12 @@ class UserAuthenticationServiceApplicationTests {
     Optional<User> optional;
     
     @SuppressWarnings("deprecation")
-	@Before(value = "")
+	@Before
     public void setUp() throws Exception {
     	MockitoAnnotations.initMocks(this);
         user = new User();
         user.setName("Mack");
-        user.setDob((java.sql.Date) new Date());
+        user.setDob(new Date(2020,8,12));
         user.setEmail("mack@gmail.com");
         user.setPassword("123456");
     }
@@ -45,7 +49,7 @@ class UserAuthenticationServiceApplicationTests {
 
         Mockito.when(autheticationRepository.save(user)).thenReturn(user);
         boolean flag = authenticationService.saveUser(user);
-        Assert.assertEquals("Cannot Register User", true, flag);
+       Assert.assertEquals(true, flag);
 
     }
 
@@ -53,10 +57,11 @@ class UserAuthenticationServiceApplicationTests {
     @Test
     public void testSaveUserFailure() throws UserAlreadyExistException {
 
-        java.util.Optional<User> optional;
+        Optional<User> optional=Optional.empty();
+       
 		Mockito.when(autheticationRepository.findByEmail("mack@gmail.com")).thenReturn(optional);
         Mockito.when(autheticationRepository.save(user)).thenReturn(user);
         boolean flag = authenticationService.saveUser(user);
-        Assert.assertEquals("Cannot Register User", true, flag);
+        Assert.assertEquals( true, flag);
     }
 }
