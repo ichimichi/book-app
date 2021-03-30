@@ -68,7 +68,7 @@ public class FavouriteController {
 		System.out.println(claims.getId());
 		try {
 		if (service.removeBook(bookId,claims.getId())) {
-			return new ResponseEntity<String>("Successfully removed Book", HttpStatus.OK);
+			return new ResponseEntity(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>("Book Not Found", HttpStatus.NOT_FOUND);
 		}

@@ -14,6 +14,7 @@ import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 })
 export class BookCardComponent implements OnInit {
   @Input() book: Book | undefined;
+  @Input() type: string | undefined;
   dialogData: DialogData | undefined;
 
   constructor(
@@ -36,18 +37,36 @@ export class BookCardComponent implements OnInit {
     this.recommendationService.recommendBook(book).subscribe(
       (res) => {
         console.log(res);
-        alert('Succesfully added book to recommendations');
+        this.dialogData = {
+          title: 'Recommendation Complete',
+          message: 'Book has been recommended',
+          description: '',
+          buttonText: [],
+          redirect: [],
+        };
+        this.openDialog(this.dialogData);
       },
       (err) => {
         console.error(err);
-        this.dialogData = {
-          title: 'Failed to recommend boook',
-          message: 'You need to be logged in to start recommending books',
-          description: '',
-          buttonText: ['Sign In', 'Later'],
-          redirect: ['/login'],
-        };
-        this.openDialog(this.dialogData);
+        if (err.status === 409) {
+          this.dialogData = {
+            title: 'Failed to recommend boook',
+            message: 'You have recommended this book already ',
+            description: '',
+            buttonText: [],
+            redirect: [],
+          };
+          this.openDialog(this.dialogData);
+        } else if (err.status === 0) {
+          this.dialogData = {
+            title: 'Failed to recommend boook',
+            message: 'You need to be logged in to start recommending books',
+            description: '',
+            buttonText: ['Sign In', 'Later'],
+            redirect: ['/login'],
+          };
+          this.openDialog(this.dialogData);
+        }
       }
     );
   }
@@ -56,10 +75,64 @@ export class BookCardComponent implements OnInit {
     this.favouriteService.addBook(book).subscribe(
       (res) => {
         console.log(res);
-        alert('Successfully added book to Favourites');
+        this.dialogData = {
+          title: 'Added to Favourites',
+          message: 'Book has been successfully added to favourites',
+          description: '',
+          buttonText: [],
+          redirect: [],
+        };
+        this.openDialog(this.dialogData);
       },
       (err) => {
         console.log(err);
+
+        if (err.status === 409) {
+          this.dialogData = {
+            title: 'Failed to add book to favourites',
+            message: 'Book already exists',
+            description: '',
+            buttonText: [],
+            redirect: [],
+          };
+          this.openDialog(this.dialogData);
+        } else if (err.status === 0) {
+          this.dialogData = {
+            title: 'Oops Something went wrong',
+            message:
+              'You need to be logged in to start adding books to your favourite',
+            description: '',
+            buttonText: ['Sign In', 'Later'],
+            redirect: ['/login'],
+          };
+          this.openDialog(this.dialogData);
+        }
+      }
+    );
+  }
+
+  removeFromFavourite(book: Book) {
+    this.favouriteService.removeBook(book.id).subscribe(
+      (res) => {
+        this.dialogData = {
+          title: 'Removed from Favourites',
+          message: 'Book has been successfully removed from favourites',
+          description: '',
+          buttonText: [],
+          redirect: [],
+        };
+        this.openDialog(this.dialogData);
+      },
+      (err) => {
+        console.log(err);
+        this.dialogData = {
+          title: 'Oops Something went wrong',
+          message: 'Could not remove book from favourites',
+          description: '',
+          buttonText: [],
+          redirect: [],
+        };
+        this.openDialog(this.dialogData);
       }
     );
   }

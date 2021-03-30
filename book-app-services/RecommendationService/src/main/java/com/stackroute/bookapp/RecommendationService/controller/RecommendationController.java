@@ -63,7 +63,7 @@ public class RecommendationController {
 		System.out.println(claims.getId());
 		try {
 			recommendationService.removeBookByUser(bookId, claims.getId());
-			return new ResponseEntity<String>("Recommendation removed.", HttpStatus.OK);
+			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

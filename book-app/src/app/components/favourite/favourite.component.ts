@@ -10,7 +10,6 @@ import { FavouriteService } from 'src/app/services/favourite.service';
 })
 export class FavouriteComponent implements OnInit {
   bookList: Array<Book> = [];
-  errmsg = '';
 
   constructor(
     private favService: FavouriteService,

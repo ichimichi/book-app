@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
           searchQuery: this.searchForm.value.searchQuery,
         },
       });
+      this.searchForm.patchValue({ searchQuery: '' });
     } else {
       alert('something wrong');
     }

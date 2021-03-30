@@ -15,17 +15,7 @@ export class FavouriteService {
     private httpClient: HttpClient,
     private userAuthService: UserAuthenticationService
   ) {}
-  // getfavs() {
-  //   return this.httpClient.get<Book[]>(this.api_endpoint, {
-  //     headers: {
-  //       Authorization: `Bearer ${this.userAuthService.getToken()}`,
-  //     },
-  //   });
-  // }
-  // errhandler(error:HttpErrorResponse){
-  //   return Observable.throw(error.message || 'Server Error');
 
-  // }
   getAll() {
     return this.httpClient.get(this.api_endpoint, {
       headers: {
