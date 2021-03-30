@@ -6,11 +6,6 @@
   height: 6vh;
 }
 
-.form {
-  font-size: xx-small;
-  margin-top: 1rem;
-}
-
 .sm-form {
   font-size: x-small;
   min-width: 100%;
@@ -24,24 +19,12 @@
   margin-left: 2%;
 }
 
-.search-row-1 {
-  visibility: hidden;
-}
-
-.search-row-2 {
-  visibility: visible;
-}
-
 @media (min-width: 768px) {
   .mat-toolbar {
-    max-height: 6vh;
+    min-height: 14vh;
   }
 
-  .search-row-1 {
-    visibility: visible;
-  }
-
-  .search-row-2 {
-    visibility: hidden;
+  .sm-form {
+    margin-top: 2em;
   }
 }

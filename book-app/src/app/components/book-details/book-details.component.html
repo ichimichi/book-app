@@ -1,1 +1,56 @@
-<p>book-details works!</p>
+<div class="container">
+  <div class="cards">
+    <mat-card class="drop-shadow card card-image m-2">
+      <img
+        mat-card-image
+        [src]="getThumbnail(book!.volumeInfo.imageLinks)"
+        class="card-icon"
+        alt="cover"
+      />
+    </mat-card>
+    <mat-card class="drop-shadow card card-details m-2">
+      <div class="card-content">
+        <div class="align-center"></div>
+        <div>
+          <strong>
+            <h1>{{ book!.volumeInfo.title }}</h1>
+          </strong>
+        </div>
+        <strong>Authors :</strong>
+        <div *ngFor="let author of book!.volumeInfo.authors">
+          {{ author }}
+        </div>
+        <div>
+          <strong>Description :</strong> {{ book!.volumeInfo.description }}
+        </div>
+        <hr />
+        <div>
+          <strong>Rating :</strong> {{ book!.volumeInfo.averageRating }}/5 stars
+          ({{ book!.volumeInfo.ratingsCount }}
+          users)
+        </div>
+        <div><strong>Language :</strong> {{ book!.volumeInfo.language }}</div>
+        <div>
+          <strong>Number of Pages : </strong>{{ book!.volumeInfo.pageCount }}
+        </div>
+        <div><strong>Publisher : </strong>{{ book!.volumeInfo.publisher }}</div>
+        <div>
+          <strong>Published On :</strong> {{ book!.volumeInfo.publishedDate }}
+        </div>
+        <hr />
+        <strong> Categories:</strong>
+        <div *ngFor="let category of book!.volumeInfo.categories | slice: 0:4">
+          {{ category }}
+        </div>
+        <hr />
+        <div>
+          <a [href]="book!.volumeInfo.previewLink"
+            ><button mat-button style="width: 100%" color="primary">
+              Preview
+            </button></a
+          >
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

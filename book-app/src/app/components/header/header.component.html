@@ -5,23 +5,7 @@
     >
 
     <span class="example-spacer"></span>
-    <form
-      [formGroup]="searchForm"
-      class="form search-row-1"
-      (ngSubmit)="search()"
-    >
-      <div>
-        <mat-form-field color="white" appearance="outline">
-          <mat-label>Search for a book here</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="searchQuery"
-            placeholder="Search for a book here"
-          />
-        </mat-form-field>
-      </div>
-    </form>
+
     <button
       *ngIf="isLoggedIn()"
       mat-icon-button

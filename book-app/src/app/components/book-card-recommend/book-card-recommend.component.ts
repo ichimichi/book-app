@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { DialogData } from 'src/app/models/dialog-data';
 import { ImageLinks } from 'src/app/models/image-links';
@@ -20,7 +21,8 @@ export class BookCardRecommendComponent implements OnInit {
     private recommendationService: RecommendationService,
     private localStorageSevice: LocalStorageService,
     private favouriteService: FavouriteService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -130,5 +132,13 @@ export class BookCardRecommendComponent implements OnInit {
 
   openDialog(dialogData: DialogData) {
     this.dialog.open(DialogAlertComponent, { data: dialogData });
+  }
+
+  showDetails(book: Book) {
+    this.router.navigate(['/dashboard/details'], {
+      queryParams: {
+        id: book.id,
+      },
+    });
   }
 }
