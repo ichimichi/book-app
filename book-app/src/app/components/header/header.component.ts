@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserAuthenticationService } from 'src/app/services/user-authentication.service';
 
@@ -8,7 +10,14 @@ import { UserAuthenticationService } from 'src/app/services/user-authentication.
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private userAuthService: UserAuthenticationService) {}
+  searchForm = new FormGroup({
+    searchQuery: new FormControl('', [Validators.required]),
+  });
+
+  constructor(
+    private userAuthService: UserAuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -18,5 +27,18 @@ export class HeaderComponent implements OnInit {
 
   handleLogout() {
     this.userAuthService.logout();
+  }
+
+  search() {
+    if (this.searchForm.valid) {
+      console.log(this.searchForm.value);
+      this.router.navigate(['/dashboard/searchresult'], {
+        queryParams: {
+          searchQuery: this.searchForm.value.searchQuery,
+        },
+      });
+    } else {
+      alert('something wrong');
+    }
   }
 }
