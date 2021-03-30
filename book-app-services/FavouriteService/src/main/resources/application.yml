@@ -3,7 +3,7 @@ spring:
    mongodb:
      database: BookAppDB
      port: 27017
-     host: db-mongo
+     host: localhost
 server:
  port: 8082
 
