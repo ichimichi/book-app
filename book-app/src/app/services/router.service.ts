@@ -25,4 +25,8 @@ export class RouterService {
   goToRegister() {
     this.router.navigate(['/register']);
   }
+
+  goto404() {
+    this.router.navigate(['/404']);
+  }
 }

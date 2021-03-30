@@ -10,6 +10,7 @@ import { RecommendationComponent } from './components/recommendation/recommendat
 import { RegisterComponent } from './components/register/register.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SearchComponent } from './components/search/search.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -49,14 +50,17 @@ const routes: Routes = [
       {
         path: 'favourite',
         component: FavouriteComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'recommendation',
         component: RecommendationComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthGuard],
       },
       { path: '**', component: PageNotFoundComponent },
     ],
