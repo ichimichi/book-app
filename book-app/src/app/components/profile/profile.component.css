@@ -16,6 +16,10 @@
     grid-auto-rows: auto;
     grid-gap: 1rem;
   }
+
+  .example-card {
+    max-height: 30rem;
+  }
 }
 
 @media (min-width: 768px) {
