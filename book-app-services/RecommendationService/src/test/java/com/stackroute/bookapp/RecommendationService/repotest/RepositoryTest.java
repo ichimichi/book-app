@@ -1,4 +1,4 @@
-package com.stackroute.bookapp.RecommendationService.servicetest;
+package com.stackroute.bookapp.RecommendationService.repotest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -12,23 +12,19 @@ import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.stackroute.bookapp.RecommendationService.repository.RecommendationRepository;
-import com.stackroute.bookapp.RecommendationService.service.RecommendationServiceImpl;
 import com.stackroute.bookapp.RecommendationService.model.Book;
 import com.stackroute.bookapp.RecommendationService.model.ImageLinks;
 import com.stackroute.bookapp.RecommendationService.model.IndustryIdentifier;
 import com.stackroute.bookapp.RecommendationService.model.Recommendation;
 import com.stackroute.bookapp.RecommendationService.model.VolumeInfo;
+import com.stackroute.bookapp.RecommendationService.repository.RecommendationRepository;
+import com.stackroute.bookapp.RecommendationService.service.RecommendationServiceImpl;
 
-@ExtendWith(MockitoExtension.class)
-public class ServiceTest {
-
+public class RepositoryTest {
 
 	
 	private Recommendation recommendation;
@@ -99,44 +95,25 @@ public class ServiceTest {
         options = Optional.of(recommendation);
     }
 	@Test
-    public void createRecommendationTestSuccess() throws Exception {
+	public void createRecommendationTest() {
 		
-		boolean success=true;
-//		when(repository.insert((User)any())).thenReturn("hello");
-//		doReturn(true).when(repository).insert((User)any());
-		when(repository.findByBookId((String)any())).thenReturn(recommendation);
-		Book newBook=serviceImpl.addtoRecommendations(book,"rd");
-//		System.out.println(status);
-//		System.out.println(user.getUserId());
-
-        Assert.assertEquals(newBook, book);
-        
-
-    }
-	@Test
-	public void deleteBooksSuccess()throws Exception{
-		
-		when(repository.findByBookId((String)any())).thenReturn(recommendation);
+		repository.save(recommendation);
 		when(repository.existsByBookId((String)any())).thenReturn(true);
-		
-		boolean status=serviceImpl.removeBookByUser("1", "rd");
-		Assert.assertEquals(true, status);
-		
+		Assert.assertEquals(true, repository.existsByBookId(book.getId()));
 		
 	}
-//	
 	@Test
-	public void getAllBooksSuccess() throws Exception{
-		
-		when(repository.findAll()).thenReturn(reclist);
-		when(repository.findById((String)any())).thenReturn(options);
-		
-		List<Recommendation>templist=serviceImpl.getAllRecommendedBooks("rd");
-	    Assert.assertEquals(reclist, templist);
-		
-		
-			
+	public void deleteRecommendationTest() {
+		repository.delete(recommendation);
+		when(repository.existsByBookId((String)any())).thenReturn(false);
+		Assert.assertEquals(false, repository.existsByBookId(book.getId()));
 	}
-
-
+	@Test
+	public void updateRecommendationTest() {
+		recommendation.setBookId("2");
+		repository.save(recommendation);
+		when(repository.existsByBookId((String)any())).thenReturn(true);
+		Assert.assertEquals(true, repository.existsByBookId("2"));
+		
+	}
 }
