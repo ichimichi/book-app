@@ -1,20 +1,24 @@
 <mat-card class="example-card rounded-corner drop-shadow">
   <mat-card-header>
-    <mat-card-title>{{ recommendation!.book.volumeInfo.title }}</mat-card-title>
-    <mat-card-subtitle>{{
-      recommendation!.book.volumeInfo.authors
-    }}</mat-card-subtitle>
+    <mat-card-title>{{
+      recommendation!.book.volumeInfo.title | slice: 0:50
+    }}</mat-card-title>
+    <mat-card-subtitle>
+      <div
+        *ngFor="
+          let author of recommendation!.book.volumeInfo.authors | slice: 0:2
+        "
+      >
+        {{ author }}
+      </div>
+    </mat-card-subtitle>
   </mat-card-header>
   <img
     mat-card-image
+    class="image"
     [src]="getThumbnail(recommendation!.book.volumeInfo.imageLinks)"
     alt="cover"
   />
-  <mat-card-content>
-    <p>
-      {{ recommendation!.book.volumeInfo.description | slice: 0:100 }}
-    </p>
-  </mat-card-content>
   <mat-card-actions>
     <button
       mat-icon-button
