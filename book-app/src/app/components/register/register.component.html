@@ -1,67 +1,80 @@
 <!-- <p>register works!</p> -->
 <div class="container">
-    <div class="background">
-      <mat-card class="drop-shadow card">
-        <div class="card-content">
-          <form [formGroup]="registerForm" class="text-center">
-            <div>
-              <h2>Sign Up with Your Email</h2>
-            </div>
-            <div>
-                <mat-form-field class="input-field m-5" appearance="outline">
-                  <mat-label>Name</mat-label>
-                  <input
-                    matInput
-                    type="text"
-                    formControlName="name"
-                    placeholder="Name"
-                  />
-                </mat-form-field>
-              </div>
-            <div>
-              <mat-form-field class="input-field m-5" appearance="outline">
-                <mat-label>E-mail</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  formControlName="email"
-                  placeholder="E-mail"
-                />
-              </mat-form-field>
-            </div>
-            <div>
-              <mat-form-field class="input-field m-5" appearance="outline">
-                <mat-label>Password</mat-label>
-                <input
-                  matInput
-                  type="password"
-                  formControlName="password"
-                  placeholder="Password"
-                />
-              </mat-form-field>
-              
-            </div>
-            <div>
-                <mat-form-field class="input-field m-5" appearance="outline">
-                    <mat-label>Enter Date Of Birth</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="date">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-            </div>
-            <div>
-              <button
-                class="m-5 btn"
-                mat-raised-button
-                color="primary"
-                (click)="register()"
-              >
-                Register
-              </button>
-            </div>
-          </form>
+  <div class="background">
+    <mat-card class="drop-shadow card">
+      <div class="card-content">
+        <form [formGroup]="registerForm" class="text-center">
+          <div>
+            <h2>Sign Up with Your Email</h2>
+          </div>
+          <div>
+            <mat-form-field class="input-field m-5" appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="name"
+                placeholder="Name"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="input-field m-5" appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="email"
+                placeholder="E-mail"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="input-field m-5" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="input-field m-5" appearance="outline">
+              <mat-label>Enter Date Of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              class="m-5 btn input-field"
+              mat-raised-button
+              color="primary"
+              (click)="register()"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+        <div class="text-center">
+          <hr />
+          <div>Already have an account?</div>
+          <button
+            class="m-1 btn input-field"
+            mat-button
+            color="primary"
+            (click)="gotoLogin()"
+          >
+            Login
+          </button>
         </div>
-      </mat-card>
-    </div>
+      </div>
+    </mat-card>
   </div>
-  
+</div>

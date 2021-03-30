@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../models/user';
 import { LocalStorageService } from './local-storage.service';
 import { RouterService } from './router.service';
@@ -14,23 +15,12 @@ export class UserAuthenticationService {
   constructor(
     private httpClient: HttpClient,
     private localStrorageService: LocalStorageService,
-    private routerService: RouterService
+    private routerService: RouterService,
+    private _snackBar: MatSnackBar
   ) {}
 
   login(user: { email: string; password: string }) {
-    return this.httpClient.post(`${this.api_endpoint}/login`, user).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.localStrorageService.setToken(res.token);
-        this.localStrorageService.setName(res.user.name);
-        this.localStrorageService.setEmail(res.user.email);
-        this.routerService.goToDashboard();
-      },
-      (err) => {
-        alert('Invalid credentials');
-        console.error(err);
-      }
-    );
+    return this.httpClient.post(`${this.api_endpoint}/login`, user);
   }
 
   register(user: User) {
@@ -42,7 +32,11 @@ export class UserAuthenticationService {
   }
 
   logout() {
+    this._snackBar.open(`Goodbye, ${this.localStrorageService.getName()}`, '', {
+      duration: 2000,
+    });
     this.localStrorageService.removeToken();
+
     this.routerService.goToDashboard();
   }
 

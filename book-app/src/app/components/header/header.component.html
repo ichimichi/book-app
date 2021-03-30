@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span matTooltip="dashboard"
-      ><a routerLink="/dashboard/search"> Book App</a></span
+      ><a routerLink="/dashboard/home"> Book App</a></span
     >
 
     <span class="example-spacer"></span>
@@ -48,15 +48,6 @@
       routerLink="/dashboard/profile"
     >
       <mat-icon>person</mat-icon>
-    </button>
-    <button
-      *ngIf="!isLoggedIn()"
-      mat-icon-button
-      aria-label="register"
-      matTooltip="register"
-      routerLink="/register"
-    >
-      <mat-icon>add_box</mat-icon>
     </button>
     <button
       *ngIf="!isLoggedIn()"

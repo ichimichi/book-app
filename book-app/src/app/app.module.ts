@@ -44,6 +44,8 @@ import {
 } from '@angular/material/dialog';
 import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
 import { RouterService } from './services/router.service';
+import { HomeComponent } from './components/home/home.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { RouterService } from './services/router.service';
     PageNotFoundComponent,
     BookCardRecommendComponent,
     DialogAlertComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +87,7 @@ import { RouterService } from './services/router.service';
     MatFormFieldModule,
     MatBadgeModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [
     UserAuthenticationService,
