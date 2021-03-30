@@ -37,14 +37,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BookCardRecommendComponent } from './components/book-card-recommend/book-card-recommend.component';
-import { BookCardFavouriteComponent } from './components/book-card-favourite/book-card-favourite.component';
-// import { BookCardFavouriteComponent } from './book-card-favourite/book-card-favourite.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import {
   MatDialogModule,
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
+import { RouterService } from './services/router.service';
+import { HomeComponent } from './components/home/home.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -64,9 +65,8 @@ import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.com
     BookDetailsComponent,
     PageNotFoundComponent,
     BookCardRecommendComponent,
-    BookCardFavouriteComponent,
-    // BookCardFavouriteComponent,
     DialogAlertComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +87,7 @@ import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.com
     MatFormFieldModule,
     MatBadgeModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [
     UserAuthenticationService,
@@ -94,6 +95,7 @@ import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.com
     FavouriteService,
     RecommendationService,
     GoogleBooksService,
+    RouterService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
   ],
   entryComponents: [MatDialogModule],

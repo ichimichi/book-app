@@ -1,10 +1,10 @@
-package com.stackroute.bookapp.FavouriteService;
+package com.stackroute.bookapp.RecommendationService.controllertest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FavouriteServiceApplicationTests {
+class RecommendationServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

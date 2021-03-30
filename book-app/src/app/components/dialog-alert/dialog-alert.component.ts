@@ -17,6 +17,8 @@ export class DialogAlertComponent implements OnInit {
   ngOnInit(): void {}
 
   redirect(path: string) {
-    this.router.navigate([path]);
+    if (path.length > 0) {
+      this.router.navigate([path]);
+    }
   }
 }

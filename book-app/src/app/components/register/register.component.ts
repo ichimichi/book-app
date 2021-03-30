@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogData } from 'src/app/models/dialog-data';
+import { RouterService } from 'src/app/services/router.service';
 import { UserAuthenticationService } from 'src/app/services/user-authentication.service';
-import { UserService } from 'src/app/services/user.service';
+import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 
 @Component({
   selector: 'app-register',
@@ -16,17 +18,62 @@ export class RegisterComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
   });
+  dialogData: DialogData | undefined;
 
-  constructor(private userAuthService: UserAuthenticationService) {}
+  constructor(
+    private userAuthService: UserAuthenticationService,
+    public dialog: MatDialog,
+    private routerService: RouterService
+  ) {}
 
   ngOnInit(): void {}
 
   register() {
     if (this.registerForm.valid) {
       console.log(this.registerForm.value);
-      this.userAuthService.register(this.registerForm.value);
+      this.userAuthService.register(this.registerForm.value).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.dialogData = {
+            title: 'Registration Successfull',
+            message: 'Please Sign In to continue',
+            description: '',
+            buttonText: ['Okay'],
+            redirect: ['/login'],
+          };
+          this.openDialog(this.dialogData);
+        },
+        (err) => {
+          this.dialogData = {
+            title: 'Oops Something went wrong',
+            message:
+              'User with given email already exists or you have entered an invalid input',
+            description: '',
+            buttonText: ['Okay'],
+            redirect: [''],
+          };
+          this.openDialog(this.dialogData);
+          console.error(err);
+        }
+      );
     } else {
-      alert('Something went wrong');
+      this.dialogData = {
+        title: 'Oops Something went wrong',
+        message:
+          'User with given email already exists or you have entered an invalid input',
+        description: '',
+        buttonText: ['Okay'],
+        redirect: [''],
+      };
+      this.openDialog(this.dialogData);
     }
+  }
+
+  openDialog(dialogData: DialogData) {
+    this.dialog.open(DialogAlertComponent, { data: dialogData });
+  }
+
+  gotoLogin() {
+    this.routerService.goToLogin();
   }
 }

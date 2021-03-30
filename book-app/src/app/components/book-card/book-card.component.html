@@ -1,18 +1,18 @@
 <mat-card class="example-card rounded-corner drop-shadow">
   <mat-card-header>
-    <mat-card-title>{{ book!.volumeInfo.title }}</mat-card-title>
-    <mat-card-subtitle>{{ book!.volumeInfo.authors }}</mat-card-subtitle>
+    <mat-card-title>{{ book!.volumeInfo.title | slice: 0:50 }}</mat-card-title>
+    <mat-card-subtitle>
+      <div *ngFor="let author of book!.volumeInfo.authors | slice: 0:2">
+        {{ author }}
+      </div>
+    </mat-card-subtitle>
   </mat-card-header>
   <img
     mat-card-image
+    class="image"
     [src]="getThumbnail(book!.volumeInfo.imageLinks)"
     alt="cover"
   />
-  <mat-card-content>
-    <p>
-      {{ book!.volumeInfo.description | slice: 0:100 }}
-    </p>
-  </mat-card-content>
   <mat-card-actions>
     <button
       mat-icon-button
@@ -20,7 +20,7 @@
       matTooltip="recommend"
       (click)="recommendBook(book!)"
     >
-      <mat-icon>thumb_up</mat-icon>
+      <mat-icon>thumb_up_off_alt</mat-icon>
     </button>
 
     <button
@@ -28,8 +28,18 @@
       aria-label="favourite"
       matTooltip="add to Favourite"
       (click)="addToFavourite(book!)"
+      *ngIf="type !== 'favourite'"
     >
-      <mat-icon>favorite</mat-icon>
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      aria-label="favourite"
+      matTooltip="Remove  from Favourite"
+      (click)="removeFromFavourite(book!)"
+      *ngIf="type === 'favourite'"
+    >
+      <mat-icon color="primary">favorite</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

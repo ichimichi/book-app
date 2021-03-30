@@ -2,7 +2,7 @@
   <div class="cards">
     <div *ngFor="let book of bookList">
       <div style="margin-bottom: 1rem">
-        <app-book-card-favourite [book]="book"></app-book-card-favourite>
+        <app-book-card [book]="book" type="favourite"></app-book-card>
       </div>
     </div>
   </div>

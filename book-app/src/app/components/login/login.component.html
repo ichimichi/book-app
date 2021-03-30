@@ -30,7 +30,7 @@
           </div>
           <div>
             <button
-              class="m-1 btn"
+              class="m-1 btn input-field"
               mat-raised-button
               color="primary"
               (click)="login()"
@@ -39,6 +39,19 @@
             </button>
           </div>
         </form>
+
+        <div class="text-center">
+          <hr />
+          <div>Don't have an account?</div>
+          <button
+            class="m-1 btn input-field"
+            mat-button
+            color="primary"
+            (click)="goToRegister()"
+          >
+            Register
+          </button>
+        </div>
       </div>
     </mat-card>
   </div>
