@@ -35,20 +35,7 @@ export class UserAuthenticationService {
   }
 
   register(user: User) {
-    return this.httpClient
-      .post(`${this.api_endpoint}/register`, user)
-      .subscribe(
-        (res: any) => {
-          console.log(res);
-          // this.localStrorageService.setToken(res.token);
-          alert('Registration Successfull!');
-          this.routerService.goToLogin();
-        },
-        (err) => {
-          alert('Invalid credentials');
-          console.error(err);
-        }
-      );
+    return this.httpClient.post(`${this.api_endpoint}/register`, user);
   }
 
   isLoggedIn() {
@@ -57,7 +44,6 @@ export class UserAuthenticationService {
 
   logout() {
     this.localStrorageService.removeToken();
-    alert('Successfully logged out');
     this.routerService.goToDashboard();
   }
 
