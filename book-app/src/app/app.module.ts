@@ -44,6 +44,7 @@ import {
 } from '@angular/material/dialog';
 import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
 import { RouterService } from './services/router.service';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { RouterService } from './services/router.service';
     PageNotFoundComponent,
     BookCardRecommendComponent,
     DialogAlertComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
