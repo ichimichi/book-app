@@ -24,7 +24,6 @@ export class UserAuthenticationService {
         this.localStrorageService.setToken(res.token);
         this.localStrorageService.setName(res.user.name);
         this.localStrorageService.setEmail(res.user.email);
-        alert('Welcome!');
         this.routerService.goToDashboard();
       },
       (err) => {
