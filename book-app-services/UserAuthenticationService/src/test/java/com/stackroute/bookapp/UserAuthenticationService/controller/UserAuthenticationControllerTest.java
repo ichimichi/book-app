@@ -1,16 +1,23 @@
 package com.stackroute.bookapp.UserAuthenticationService.controller;
 
-import java.util.Date;
 
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.Test;
+
+import java.sql.Date;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,16 +28,21 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.bookapp.UserAuthenticationService.model.User;
+import com.stackroute.bookapp.UserAuthenticationService.repository.UserAuthenticationRepository;
 import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationService;
+import com.stackroute.bookapp.UserAuthenticationService.service.UserAuthenticationServiceImpl;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest
+@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = "classpath:app-context.xml")
+@WebMvcTest(controllers=UserAuthenticationController.class)
 public class UserAuthenticationControllerTest {
 	@Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private UserAuthenticationService authenticationService;
+    private UserAuthenticationServiceImpl authenticationService;
+    @MockBean
+    private UserAuthenticationRepository repository;
 
     private User user;
 
@@ -39,7 +51,7 @@ public class UserAuthenticationControllerTest {
 
 
     @SuppressWarnings("deprecation")
-	@Before(value = "")
+	@Before
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
@@ -47,7 +59,7 @@ public class UserAuthenticationControllerTest {
 
         user = new User();
         user.setName("Mack");
-        user.setDob((java.sql.Date) new Date());
+        user.setDob(new Date(2020,12,31));
         user.setEmail("mack@gmail.com");
         user.setPassword("123456");
     }
@@ -57,6 +69,7 @@ public class UserAuthenticationControllerTest {
 
     	Mockito.when(authenticationService.saveUser(user)).thenReturn(true);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/register")
+        		.contentType(MediaType.APPLICATION_JSON)
                 .content(jsonToString(user)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andDo(MockMvcResultHandlers.print());
@@ -73,8 +86,10 @@ public class UserAuthenticationControllerTest {
 
         Mockito.when(authenticationService.saveUser(user)).thenReturn(true);
         Mockito.when(authenticationService.findByEmailAndPassword(email, password)).thenReturn(user);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/login").content(jsonToString(user)))
-        .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/login")
+        		.contentType(MediaType.APPLICATION_JSON)
+        		.content(jsonToString(user)))
+        		.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
     private static String jsonToString(final Object obj) throws JsonProcessingException {
         String result;
