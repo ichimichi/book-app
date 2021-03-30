@@ -57,7 +57,7 @@ public class UserController {
 	}
 
 	@DeleteMapping
-	public ResponseEntity<String> delete(@PathVariable() String id, @RequestAttribute Claims claims) {
+	public ResponseEntity<String> delete(@RequestParam String id, @RequestAttribute Claims claims) {
 		try {
 			service.deleteUser(claims.getId());
 			return new ResponseEntity<String>("Successfully Deleted User with id: " + claims.getId(), HttpStatus.OK);

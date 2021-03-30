@@ -35,10 +35,14 @@ public class JwtFilter extends GenericFilterBean {
 		HttpServletRequest hreq = (HttpServletRequest) request;
 		HttpServletResponse hres = (HttpServletResponse) response;
 		String authHeader = hreq.getHeader("Authorization");
+		System.out.println(authHeader);
+		System.out.println("filtering");
 		if ("OPTIONS".equals(hreq.getMethod())) {
 			hres.setStatus(HttpServletResponse.SC_OK);
 			chain.doFilter(request, response);
+			System.out.println("filtering going on");
 		} else {
+			System.out.println("filtering going on again");
 			try {
 				if (authHeader == null || !authHeader.startsWith("Bearer ")) {
 					hres.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -48,12 +52,16 @@ public class JwtFilter extends GenericFilterBean {
 
 				String token = authHeader.split(" ")[1];
 				Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).getBody();
+				
 				request.setAttribute("claims", claims);
 				chain.doFilter(request, response);
+				System.out.println("hello");
 			} catch (SignatureException ex) {
+				System.out.println("hello2");
 				hres.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 //	            throw new ServletException("Invalid Token");
 			} catch (MalformedJwtException ex) {
+				System.out.println("hello3");
 				hres.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 //	            throw new ServletException("JWT is malformed");
 			}

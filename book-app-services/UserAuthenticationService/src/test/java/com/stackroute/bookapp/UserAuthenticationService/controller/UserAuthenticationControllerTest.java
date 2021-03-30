@@ -43,7 +43,7 @@ public class UserAuthenticationControllerTest {
     private UserAuthenticationServiceImpl authenticationService;
     @MockBean
     private UserAuthenticationRepository repository;
-
+    
     private User user;
 
     @InjectMocks
