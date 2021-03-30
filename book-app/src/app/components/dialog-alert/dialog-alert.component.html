@@ -6,10 +6,22 @@
   </p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close (click)="redirect(data.redirect[0])">
-    {{ data.buttonText[0] }}
-  </button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-    {{ data.buttonText[1] }}
-  </button>
+  <div *ngFor="let path of data.redirect; let i = index">
+    <button
+      mat-button
+      mat-dialog-close
+      (click)="redirect(path)"
+      *ngIf="i < data.redirect.length"
+    >
+      {{ data.buttonText[0] }}
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      *ngIf="i === data.redirect.length - 1"
+    >
+      {{ data.buttonText[1] }}
+    </button>
+  </div>
 </mat-dialog-actions>
