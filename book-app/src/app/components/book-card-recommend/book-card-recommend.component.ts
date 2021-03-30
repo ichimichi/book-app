@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import { ImageLinks } from 'src/app/models/image-links';
 import { Recommendation } from 'src/app/models/recommendation';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RecommendationService } from 'src/app/services/recommendation.service';
 
 @Component({
@@ -11,7 +12,10 @@ import { RecommendationService } from 'src/app/services/recommendation.service';
 })
 export class BookCardRecommendComponent implements OnInit {
   @Input() recommendation: Recommendation | undefined;
-  constructor(private recommendationService: RecommendationService) {}
+  constructor(
+    private recommendationService: RecommendationService,
+    private localStorageSevice: LocalStorageService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -51,5 +55,9 @@ export class BookCardRecommendComponent implements OnInit {
 
   getNumberOfRecommendations(recommendation: Recommendation) {
     return recommendation.users.length;
+  }
+
+  isAlreadyRecommended(recommendation: Recommendation) {
+    return recommendation.users.includes(this.localStorageSevice.getEmail()!);
   }
 }

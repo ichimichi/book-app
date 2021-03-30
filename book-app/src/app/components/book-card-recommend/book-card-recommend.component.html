@@ -24,6 +24,7 @@
       mat-icon-button
       aria-label="recommendation"
       matTooltip="recommend"
+      [disabled]="isAlreadyRecommended(recommendation!)"
       (click)="recommendBook(recommendation!.book)"
     >
       <mat-icon
@@ -36,6 +37,7 @@
       mat-icon-button
       aria-label="remove recommendation"
       matTooltip="remove recommendation"
+      [disabled]="!isAlreadyRecommended(recommendation!)"
       (click)="unRecommendBook(recommendation!.book)"
     >
       <mat-icon>thumb_down</mat-icon>
