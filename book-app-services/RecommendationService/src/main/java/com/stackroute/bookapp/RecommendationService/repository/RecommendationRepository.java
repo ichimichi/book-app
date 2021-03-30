@@ -7,7 +7,6 @@ import com.stackroute.bookapp.RecommendationService.model.Recommendation;
 
 @Repository
 public interface RecommendationRepository extends MongoRepository<Recommendation, String> {
-	boolean existsByUserId(String userId);
-
-	Recommendation findByUserId(String userId);
+	boolean existsByBookId(String bookID);
+	Recommendation findByBookId(String bookID);
 }

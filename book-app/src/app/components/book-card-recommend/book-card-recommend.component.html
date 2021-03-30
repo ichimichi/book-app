@@ -1,19 +1,48 @@
 <mat-card class="example-card rounded-corner drop-shadow">
   <mat-card-header>
-    <mat-card-title>{{ book!.volumeInfo.title }}</mat-card-title>
-    <mat-card-subtitle>{{ book!.volumeInfo.authors }}</mat-card-subtitle>
+    <mat-card-title>{{ recommendation!.book.volumeInfo.title }}</mat-card-title>
+    <mat-card-subtitle>{{
+      recommendation!.book.volumeInfo.authors
+    }}</mat-card-subtitle>
   </mat-card-header>
   <img
     mat-card-image
-    [src]="getThumbnail(book!.volumeInfo.imageLinks)"
+    [src]="getThumbnail(recommendation!.book.volumeInfo.imageLinks)"
     alt="cover"
   />
   <mat-card-content>
     <p>
-      {{ book!.volumeInfo.description }}
+      {{ recommendation!.book.volumeInfo.description | slice: 0:100 }}
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="removeBook(book!)">Remove Book</button>
+    <button
+      mat-icon-button
+      aria-label="recommendation"
+      matTooltip="recommend"
+      (click)="recommendBook(recommendation!.book)"
+    >
+      <mat-icon
+        [matBadge]="getNumberOfRecommendations(recommendation!)"
+        matBadgePosition="before"
+        >thumb_up</mat-icon
+      >
+    </button>
+    <button
+      mat-icon-button
+      aria-label="remove recommendation"
+      matTooltip="remove recommendation"
+      (click)="unRecommendBook(recommendation!.book)"
+    >
+      <mat-icon>thumb_down</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      aria-label="favourite"
+      matTooltip="add to Favourite"
+      (click)="addToFavourite(recommendation!.book)"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>

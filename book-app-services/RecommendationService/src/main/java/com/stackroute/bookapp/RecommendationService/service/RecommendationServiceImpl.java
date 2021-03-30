@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.stackroute.bookapp.RecommendationService.exception.BookAlreadyExistsException;
 import com.stackroute.bookapp.RecommendationService.exception.BookNotFoundException;
+import com.stackroute.bookapp.RecommendationService.exception.NoRecommendationsExists;
+import com.stackroute.bookapp.RecommendationService.exception.RecommendationAlreadyExists;
 import com.stackroute.bookapp.RecommendationService.exception.UserNotFoundException;
 import com.stackroute.bookapp.RecommendationService.model.Book;
 import com.stackroute.bookapp.RecommendationService.model.Recommendation;
@@ -21,73 +23,70 @@ public class RecommendationServiceImpl implements RecommendationService {
 	RecommendationRepository recommendationRepository;
 
 	@Override
-	public List<Book> getAllRecommendedBooks(String userId) throws UserNotFoundException {
-		// TODO Auto-generated method stub
-		if (recommendationRepository.existsByUserId(userId)) {
-			Recommendation rec = recommendationRepository.findByUserId(userId);
-			return rec.getBooks();
-		} else {
-			throw new UserNotFoundException(userId);
+	public List<Recommendation> getAllRecommendedBooks(String userId) throws NoRecommendationsExists {
+		List rec = recommendationRepository.findAll();
+		if (rec.size() == 0) {
+			throw new NoRecommendationsExists("No Recommendation exists yet");
 		}
+		return rec;
 	}
 
 	@Override
-	public Book removeBookByUser(String bookId, String userId) throws BookNotFoundException, UserNotFoundException {
+	public boolean removeBookByUser(String bookId, String userId) throws BookNotFoundException, UserNotFoundException {
 		// TODO Auto-generated method stub
-		Book deletedBook = null;
-		if (recommendationRepository.existsByUserId(userId)) {
-			Recommendation rec = recommendationRepository.findByUserId(userId);
-			List bookList = rec.getBooks();
+		String deletedUser = null;
+		if (recommendationRepository.existsByBookId(bookId)) {
+			Recommendation rec = recommendationRepository.findByBookId(bookId);
+			List userList = rec.getUsers();
 
-			Iterator iterator = bookList.listIterator();
+			Iterator iterator = userList.listIterator();
 
 			while (iterator.hasNext()) {
-				Book b = (Book) iterator.next();
-				if (b.getId().equals(bookId)) {
+				String userIdDb = (String) iterator.next();
+				if (userIdDb.equals(userId)) {
 					iterator.remove();
-					deletedBook = b;
+					deletedUser = userIdDb;
 				}
 			}
-			rec.setBooks(bookList);
+			rec.setUsers(userList);
 			recommendationRepository.save(rec);
-			if (deletedBook != null) {
-				return deletedBook;
+			if (deletedUser != null) {
+				return true;
 			} else {
-				throw new BookNotFoundException("Book not found");
+				throw new UserNotFoundException("Haven't recommended book yet.");
 			}
 
 		} else {
-			throw new UserNotFoundException(userId);
+			throw new BookNotFoundException("Book Not Found");
 		}
 	}
 
 	@Override
-	public Book addtoRecommendations(Book book, String userId) throws BookAlreadyExistsException {
+	public Book addtoRecommendations(Book book, String userId) throws RecommendationAlreadyExists {
 		// TODO Auto-generated method stub
-		if (recommendationRepository.existsByUserId(userId)) {
-			Recommendation rec = recommendationRepository.findByUserId(userId);
-			List bookList = rec.getBooks();
-			Iterator iterator = bookList.iterator();
-			Book temp = new Book();
-			while (iterator.hasNext()) {
+		if (recommendationRepository.existsByBookId(book.getId())) {
+			Recommendation rec = recommendationRepository.findByBookId(book.getId());
+			List userList = rec.getUsers();
+			Iterator iterator = userList.iterator();
 
-				temp = (Book) (iterator.next());
-				if (temp.getId().equals(book.getId())) {
-					throw new BookAlreadyExistsException("Book Already Exists");
+			while (iterator.hasNext()) {
+				String userIdDb = (String) iterator.next();
+				if (userIdDb.equals(userId)) {
+					throw new RecommendationAlreadyExists("Already recommended.");
 				}
 			}
 
-			bookList.add(book);
-			rec.setBooks(bookList);
+			userList.add(userId);
+			rec.setUsers(userList);
 			recommendationRepository.save(rec);
 			return book;
-
 		} else {
 			Recommendation rec = new Recommendation();
-			rec.setUserId(userId);
-			List bookList = new ArrayList<>();
-			bookList.add(book);
-			rec.setBooks(bookList);
+			rec.setBookId(book.getId());
+			rec.setBook(book);
+			List userList = new ArrayList<>();
+			userList.add(userId);
+			rec.setUsers(userList);
 			recommendationRepository.insert(rec);
 			return book;
 		}

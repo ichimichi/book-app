@@ -26,8 +26,8 @@ export class BookCardComponent implements OnInit {
     }
   }
 
-  addToRecommended(book: Book) {
-    this.recommendationService.addBook(book).subscribe(
+  recommendBook(book: Book) {
+    this.recommendationService.recommendBook(book).subscribe(
       (res) => {
         console.log(res);
         alert('Succesfully added book to recommendations');
@@ -37,6 +37,7 @@ export class BookCardComponent implements OnInit {
       }
     );
   }
+
   addToFavourite(book: Book) {
     this.favouriteService.addBook(book).subscribe(
       (res) => {

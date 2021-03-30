@@ -10,13 +10,26 @@
   />
   <mat-card-content>
     <p>
-      {{ book!.volumeInfo.description }}
+      {{ book!.volumeInfo.description | slice: 0:100 }}
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="addToFavourite(book!)">Add to Favourite</button>
-    <button mat-button (click)="addToRecommended(book!)">
-      Add to Recommended
+    <button
+      mat-icon-button
+      aria-label="recommendation"
+      matTooltip="recommend"
+      (click)="recommendBook(book!)"
+    >
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      aria-label="favourite"
+      matTooltip="add to Favourite"
+      (click)="addToFavourite(book!)"
+    >
+      <mat-icon>favorite</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

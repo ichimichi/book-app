@@ -14,6 +14,7 @@ public class UserServiceApplication
 	public FilterRegistrationBean<JwtFilter> jwtFilter() {
 		FilterRegistrationBean<JwtFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.addUrlPatterns("/api/v1/user");
+		filterRegistrationBean.addUrlPatterns("/api/v1/user/interest");
 		filterRegistrationBean.setFilter(new JwtFilter());
 		return filterRegistrationBean;
 	}

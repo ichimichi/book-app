@@ -14,7 +14,7 @@ export class RecommendationService {
     private userAuthService: UserAuthenticationService
   ) {}
 
-  getAll() {
+  getAllRecommendations() {
     return this.httpClient.get(this.api_endpoint, {
       headers: {
         Authorization: `Bearer ${this.userAuthService.getToken()}`,
@@ -22,7 +22,7 @@ export class RecommendationService {
     });
   }
 
-  removeBook(bookId: string) {
+  removeBookFromRecommendation(bookId: string) {
     return this.httpClient.delete(this.api_endpoint, {
       params: {
         bookId: bookId,
@@ -33,7 +33,7 @@ export class RecommendationService {
     });
   }
 
-  addBook(book: Book) {
+  recommendBook(book: Book) {
     return this.httpClient.post(this.api_endpoint, book, {
       headers: {
         Authorization: `Bearer ${this.userAuthService.getToken()}`,
