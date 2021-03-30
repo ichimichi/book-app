@@ -18,4 +18,12 @@ export class GoogleBooksService {
       },
     });
   }
+
+  getBook(id: string) {
+    return this.httpClient.get(`${this.api_endpoint}/${id}`, {
+      params: {
+        key: this.key,
+      },
+    });
+  }
 }

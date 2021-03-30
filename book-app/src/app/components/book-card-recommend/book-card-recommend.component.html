@@ -1,5 +1,9 @@
 <mat-card class="example-card rounded-corner drop-shadow">
-  <mat-card-header>
+  <mat-card-header
+    (click)="showDetails(recommendation!.book)"
+    style="cursor: 'pointer'"
+    matTooltip="View Details"
+  >
     <mat-card-title>{{
       recommendation!.book.volumeInfo.title | slice: 0:50
     }}</mat-card-title>
