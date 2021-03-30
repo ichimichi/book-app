@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogData } from 'src/app/models/dialog-data';
 import { User } from 'src/app/models/user';
+import { RouterService } from 'src/app/services/router.service';
 import { UserAuthenticationService } from 'src/app/services/user-authentication.service';
 import { UserService } from 'src/app/services/user.service';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private userAuthService: UserAuthenticationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private routerService: RouterService
   ) {}
 
   ngOnInit(): void {}
@@ -71,5 +73,9 @@ export class RegisterComponent implements OnInit {
 
   openDialog(dialogData: DialogData) {
     this.dialog.open(DialogAlertComponent, { data: dialogData });
+  }
+
+  gotoLogin() {
+    this.routerService.goToLogin();
   }
 }

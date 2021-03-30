@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { RouterService } from 'src/app/services/router.service';
 import { UserAuthenticationService } from 'src/app/services/user-authentication.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userAuthService: UserAuthenticationService,
-    private router: Router
+    private routerService: RouterService
   ) {}
 
   ngOnInit(): void {}
@@ -28,5 +28,9 @@ export class LoginComponent implements OnInit {
     } else {
       alert('Something went wrong');
     }
+  }
+
+  goToRegister() {
+    this.routerService.goToRegister();
   }
 }
