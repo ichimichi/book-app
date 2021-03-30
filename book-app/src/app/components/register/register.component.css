@@ -50,4 +50,8 @@
     justify-self: center;
     align-self: center;
   }
+
+  .input-field {
+    min-width: 300px;
+  }
 }
