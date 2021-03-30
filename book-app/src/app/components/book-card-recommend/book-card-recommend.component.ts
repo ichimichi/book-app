@@ -3,6 +3,7 @@ import { Book } from 'src/app/models/book';
 import { ImageLinks } from 'src/app/models/image-links';
 import { Recommendation } from 'src/app/models/recommendation';
 import { RecommendationService } from 'src/app/services/recommendation.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-book-card-recommend',
@@ -10,8 +11,11 @@ import { RecommendationService } from 'src/app/services/recommendation.service';
   styleUrls: ['./book-card-recommend.component.css'],
 })
 export class BookCardRecommendComponent implements OnInit {
-  @Input() recommendation: Recommendation | undefined;
-  constructor(private recommendationService: RecommendationService) {}
+  @Input() book: Book | undefined;
+  constructor(
+    private recommendationService: RecommendationService,
+    private routerService: RouterService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -28,6 +32,7 @@ export class BookCardRecommendComponent implements OnInit {
       (res) => {
         console.log(res);
         alert('Successfully removed book from recommendations');
+        // this.routerService.goToRecommendation();
       },
       (err) => {
         console.error(err);

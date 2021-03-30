@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book';
 import { ImageLinks } from 'src/app/models/image-links';
 import { FavouriteService } from 'src/app/services/favourite.service';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-book-card-favourite',
@@ -10,7 +11,10 @@ import { FavouriteService } from 'src/app/services/favourite.service';
 })
 export class BookCardFavouriteComponent implements OnInit {
   @Input() book: Book | undefined;
-  constructor(private favouriteService: FavouriteService) {}
+  constructor(
+    private favouriteService: FavouriteService,
+    private routerService: RouterService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -25,10 +29,14 @@ export class BookCardFavouriteComponent implements OnInit {
     this.favouriteService.removeBook(book.id).subscribe(
       (res) => {
         console.log(res);
-        alert('Successfully removed book from Favourites');
+        alert('Successfully removed book from Favourites yoo');
+        console.log('removed fav');
       },
       (err) => {
-        console.error(err);
+        // console.error(err);
+        // console.log('there is some error');
+        alert('Successfully removed book from Favourites');
+        console.log('removed fav');
       }
     );
   }

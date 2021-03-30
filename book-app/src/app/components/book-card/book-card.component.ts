@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { DialogData } from 'src/app/models/dialog-data';
 import { ImageLinks } from 'src/app/models/image-links';
+import { FavouriteService } from 'src/app/services/favourite.service';
 import { RecommendationService } from 'src/app/services/recommendation.service';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 
@@ -18,6 +18,7 @@ export class BookCardComponent implements OnInit {
 
   constructor(
     private recommendationService: RecommendationService,
+    private favouriteService: FavouriteService,
     public dialog: MatDialog
   ) {}
 
@@ -52,7 +53,15 @@ export class BookCardComponent implements OnInit {
   }
 
   addToFavourite(book: Book) {
-    console.log('hi');
+    this.favouriteService.addBook(book).subscribe(
+      (res) => {
+        console.log(res);
+        alert('Successfully added book to Favourites');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   openDialog(dialogData: DialogData) {
