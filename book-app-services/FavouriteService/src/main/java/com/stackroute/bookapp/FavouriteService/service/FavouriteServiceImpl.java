@@ -88,9 +88,8 @@ public class FavouriteServiceImpl implements FavouriteService{
 			}
 			user.setUserId(UserId);
 			user.setBookList(books);
-			if(repository.save(user)!=null) {
-				status=true;
-			}
+			repository.save(user);
+			if(check)status=true;
 		}
 		else {
 			
@@ -107,15 +106,26 @@ public class FavouriteServiceImpl implements FavouriteService{
 		try {
 			
 		books = repository.findById(UserId).get().getBookList();
-		if(books!=null) {
+		System.out.println(books.size()+"hello");
+		try {
+		if(books.size()!=0) {
+			
 			books.clear();
+			
+			System.out.println("error also");
+			
 		}
 		user.setUserId(UserId);
-		user.setBookList(books);
+		user.setBookList(books);}
+		catch(Exception e) {
+			System.out.println("error here");
+			throw new Exception();
+		}
 		repository.save(user);
 		status=true;
 		}
 		catch(Exception e) {
+			System.out.println("error");
 			return false;
 		}
 		return status;
