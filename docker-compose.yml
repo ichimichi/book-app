@@ -45,12 +45,3 @@ services:
       - db-mongo
     ports:
       - "8083:8083"
-
-  user-service:
-    image: user-service
-    build:
-      context: book-app-services/UserService/
-    depends_on:
-      - db-mongo
-    ports:
-      - "8081:8081"
