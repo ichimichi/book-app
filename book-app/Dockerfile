@@ -1,6 +1,4 @@
-# to build image run
-# docker build . -f Dockerfile -t book-app:latest
-FROM node:14.0.0 as build-stage
+FROM node:lts as build-stage
 WORKDIR /app
 COPY package*.json /app/
 RUN npm install
