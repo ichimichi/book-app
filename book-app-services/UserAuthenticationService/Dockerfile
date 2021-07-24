@@ -6,4 +6,4 @@ RUN mvn -f /usr/src/app/pom.xml clean package -D skipTests
 FROM java:8-jre
 COPY --from=build /usr/src/app/target/UserAuthenticationService-0.0.1-SNAPSHOT.jar /usr/src/UserAuthenticationService-0.0.1-SNAPSHOT.jar
 WORKDIR /usr/src
-CMD ["java","-jar","/usr/src/UserAuthenticationService-0.0.1-SNAPSHOT.jar"
+CMD ["java","-jar","/usr/src/UserAuthenticationService-0.0.1-SNAPSHOT.jar"]
